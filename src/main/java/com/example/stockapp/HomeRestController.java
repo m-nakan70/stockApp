@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RestController
 public class HomeRestController {
 
-   record StockItem <integer>(String id, String stock, Integer qty ){}
+   record StockItem <integer>(String id, String stock, String memo,Integer qty ){}
 //    , integer type, String regi_day, String up_day
     private List<StockItem> stockItems = new ArrayList<>();
     @RequestMapping(value="/resthello")
@@ -27,16 +27,16 @@ public class HomeRestController {
 
     @GetMapping("/restadd")
     String addItem(@RequestParam("stock") String stock,
+                  @RequestParam("memo") String memo,
                   @RequestParam("qty") Integer qty){
-
           String id = UUID.randomUUID().toString().substring(0,8);
-          StockItem item = new StockItem(id, stock, qty);
+          StockItem item = new StockItem(id, stock, memo,qty);
           stockItems.add(item);
 
           return "ストックを追加しました";
     }
     @GetMapping("/restlist")
-    String listItem(){
+    String listItems(){
         String result = stockItems.stream()
                 .map(StockItem::toString)
                 .collect(Collectors.joining(", "));

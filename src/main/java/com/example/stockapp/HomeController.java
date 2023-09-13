@@ -1,5 +1,6 @@
 package com.example.stockapp;
 
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +17,31 @@ import java.util.stream.Collectors;
 @Controller
 public class HomeController {
 
-    record StockItem(String id, String stock, Integer qty ){}
-    private List<HomeRestController.StockItem> stockItems = new ArrayList<>();
+    record StockItem(String id, String stock, String memo,Integer qty ){}
+    private List<StockItem> stockItems = new ArrayList<>();
     @RequestMapping(value = "/hello")
 //    @ResponseBody
     String hello(Model model){
         model.addAttribute("time", LocalDateTime.now());
         return "hello";
     }
+    @GetMapping("/list")
+    String stockItems(Model model){
+        model.addAttribute("stockList", stockItems);
+        return "home";
+    }
+    @GetMapping("/add")
+    String addItem(@RequestParam("stock") String stock,
+                   @RequestParam("memo") String memo,
+                   @RequestParam("qty")Integer qty){
+        String id = UUID.randomUUID().toString().substring(0,8);
+        StockItem item = new StockItem(id, stock, memo, qty);
+        stockItems.add(item);
+
+        return "redirect:/list";
+    }
 }
+
 
 
 

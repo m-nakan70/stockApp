@@ -66,26 +66,19 @@
   </thead>
     <tbody>
         <tr th:each="stock : ${stockList}">
-          <td th:text="${stock.id}"></td>
+          <td width="50px" th:text="${stock.id}"></td>
           <td th:text="${stock.stock}"></td>
           <td th:text="${stock.memo}"></td>
-          <td th:text="${stock.qty}"></td>
-          <td th:text="${stock.type}"></td>
+          <td width="80px"th:text="${stock.qty}"></td>
+          <td width="80px"th:text="${stock.type}"></td>
+          <td width="80px">
+            <form action="/delete">
+                <button type="submit" id="delete_buttom">削除</button>
+                <input type="hidden" name="id" th:value="${stock.id}"/>
+            </form>
+        </td>
         </tr>
     </tbody>
-<table border="1">
- <thead>
-    <tr>
-        <th class="hidden">ID</th>
-        <th>タスク</th>
-
-
-    </tr>
-
- </thead>
-
-
-</table>
 </table>
 </div>
 </body>

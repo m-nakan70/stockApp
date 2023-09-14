@@ -39,9 +39,18 @@ public class StockAppDao{
 
         return  stockItems;
     }
-
     public int delete(String id){
         int number = jdbcTemplate.update("DELETE FROM foodlist WHERE id = ?", id);
+        return number;
+    }
+
+    public int update(StockItem stockItem){
+        int number = jdbcTemplate.update(
+                "UPDATE foodlist SET stock = ?, memo = ? qty = ?, type = ? WHERE id = ?",
+                    stockItem.stock(),
+                    stockItem.memo(),
+                    stockItem.qty(),
+                    stockItem.type());
         return number;
     }
 }

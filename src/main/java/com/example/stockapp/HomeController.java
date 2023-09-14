@@ -51,9 +51,18 @@ public class HomeController {
     @GetMapping("/delete")
     String deleteItem(@RequestParam("id") String id){
         dao.delete(id);
-        return "redirect/list";
+        return "redirect:/list";
     }
-
+    @GetMapping("/update")
+    String updateItem(@RequestParam("id") String id,
+                      @RequestParam("stock") String stock,
+                      @RequestParam("memo") String memo,
+                      @RequestParam("qty") String qty,
+                      @RequestParam("type") String type) {
+        StockItem stockItem = new StockItem(id, stock, memo, qty, type);
+        dao.update(stockItem);
+        return "redirect:/list";
+    }
 }
 
 

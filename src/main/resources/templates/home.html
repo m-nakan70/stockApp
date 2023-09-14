@@ -28,7 +28,7 @@
                   <option>常温</option>
               </class>
           </td></tr>
-  </table>
+  </table><br>
   <input type="submit" value="登録"  />
 </table>
 </form>
@@ -66,13 +66,26 @@
   </thead>
     <tbody>
         <tr th:each="stock : ${stockList}">
-          <td class="hidden" th:text="${stock.id}"></td>
+          <td th:text="${stock.id}"></td>
           <td th:text="${stock.stock}"></td>
           <td th:text="${stock.memo}"></td>
           <td th:text="${stock.qty}"></td>
           <td th:text="${stock.type}"></td>
         </tr>
     </tbody>
+<table border="1">
+ <thead>
+    <tr>
+        <th class="hidden">ID</th>
+        <th>タスク</th>
+
+
+    </tr>
+
+ </thead>
+
+
+</table>
 </table>
 </div>
 </body>

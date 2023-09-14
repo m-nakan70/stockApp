@@ -1,5 +1,6 @@
 package com.example.stockapp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +17,19 @@ import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
-
+    private final StockAppDao dao;
     record StockItem(String id, String stock, String memo,String qty, String type ){}
     private List<StockItem> stockItems = new ArrayList<>();
+
+    @Autowired
+    HomeController(StockAppDao dao){
+        this.dao = dao;
+    }
     @RequestMapping(value = "/hello")
 //    @ResponseBody
     String hello(Model model){
         model.addAttribute("time", LocalDateTime.now());
         return "hello";
-    }
-    @GetMapping("/list")
-    String stockItems(Model model){
-        model.addAttribute("stockList", stockItems);
-        return "home";
     }
     @GetMapping("/add")
     String addItem(@RequestParam("stock") String stock,
@@ -37,10 +38,22 @@ public class HomeController {
                    @RequestParam("type") String type){
         String id = UUID.randomUUID().toString().substring(0,8);
         StockItem item = new StockItem(id, stock, memo, qty, type);
-        stockItems.add(item);
+        dao.add(item);
 
         return "redirect:/list";
     }
+    @GetMapping("/list")
+    String stockItems(Model model){
+        List<StockItem>stockItems = dao.findAll();
+        model.addAttribute("stockList", stockItems);
+        return "home";
+    }
+    @GetMapping("/delete")
+    String deleteItem(@RequestParam("id") String id){
+        dao.delete(id);
+        return "redirect/list";
+    }
+
 }
 
 

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Controller
 public class HomeController {
 
-    record StockItem(String id, String stock, String memo,Integer qty ){}
+    record StockItem(String id, String stock, String memo,String qty, String type ){}
     private List<StockItem> stockItems = new ArrayList<>();
     @RequestMapping(value = "/hello")
 //    @ResponseBody
@@ -33,9 +33,10 @@ public class HomeController {
     @GetMapping("/add")
     String addItem(@RequestParam("stock") String stock,
                    @RequestParam("memo") String memo,
-                   @RequestParam("qty")Integer qty){
+                   @RequestParam("qty") String qty,
+                   @RequestParam("type") String type){
         String id = UUID.randomUUID().toString().substring(0,8);
-        StockItem item = new StockItem(id, stock, memo, qty);
+        StockItem item = new StockItem(id, stock, memo, qty, type);
         stockItems.add(item);
 
         return "redirect:/list";

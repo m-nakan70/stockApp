@@ -17,7 +17,7 @@ input {
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
 }
-.task_form form{
+.stock_form table{
     display: grid;
     grid-template-columns: 100px 1fr;
 }

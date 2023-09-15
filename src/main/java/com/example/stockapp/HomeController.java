@@ -59,7 +59,7 @@ public class HomeController {
                       @RequestParam("memo") String memo,
                       @RequestParam("qty") String qty,
                       @RequestParam("type") String type) {
-        StockItem stockItem = new StockItem(id, stock, memo, qty, type);
+        StockItem stockItem = new StockItem(id,stock,memo,qty,type);
         dao.update(stockItem);
         return "redirect:/list";
     }

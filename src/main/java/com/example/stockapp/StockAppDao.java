@@ -46,11 +46,10 @@ public class StockAppDao{
 
     public int update(StockItem stockItem){
         int number = jdbcTemplate.update(
-                "UPDATE foodlist SET stock = ?, memo = ? qty = ?, type = ? WHERE id = ?",
-                    stockItem.stock(),
+                "UPDATE foodlist SET memo = ?, qty = ? WHERE id= ?",
                     stockItem.memo(),
                     stockItem.qty(),
-                    stockItem.type());
+                    stockItem.id());
         return number;
     }
 }

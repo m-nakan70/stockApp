@@ -20,6 +20,10 @@ input {
 .stock_form table{
     display: grid;
     grid-template-columns: 100px 1fr;
+    number: grid;
+    grid-template-columns: 30px 1fr;
+    select: grid;
+    grid-template-columns: 100px 1fr;
 }
 .task_form input[type="date"], select{
     width: 150px;

@@ -68,17 +68,14 @@
         <tr th:each="stock : ${stockList}">
           <td th:text="${stock.id}"></td>
           <td th:text="${stock.stock}"></td>
-          <td th:text="${stock.memo}">
-          <input name="stock.memo" class="form-control" type="text" /></td>
-          <td width="80px"th:text="${stock.qty}">
-<!--          <input name="stock.qty" class="form-control" type="number" />-->
-              <div class="spinner-container">
+          <td><div class="form-control" th:text="${stock.memo}" input name="stock.memo" type="text"></div></td>
+          <td width="80px"><input name="stock.qty" class="spinner-container" type="number" min="0" max="25" value="th:text='${stock.qty}'"></td>
+<!--          <input name="stock.qty" class="spinner-container" type="number" />-->
 <!--                  <span class="spinner-sub disabled">-</span>-->
-                  <input class="spinner" type="number" min="0" max="25" value="0">
 <!--                  <span class="spinner-add">+</span>-->
-              </div>
-              <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script></td>
-          <td width="80px"th:text="${stock.type}"></td>
+
+          <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+          <td th:text="${stock.type}"></td>
           <td width="80px">
 <!--                <button type="submit" class="btn btn-primary" id="update_buttom" onclick="-->
 <!--                    let row = this.parentElement.parentElement;-->
@@ -137,6 +134,9 @@
 <!--            </form>-->
 <!--    </div>-->
 <!--</div>-->
+<div id="update_func">
+
+</div>
 </body>
 </html>
 

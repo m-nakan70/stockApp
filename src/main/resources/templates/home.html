@@ -14,20 +14,30 @@
 <form action="/add">
 <table class=" ">
   <table>
-    <tr><th><label>ストック名</label></th>
-    <td><input name="stock" class="form-control" type="text"/></td></tr>
-    <tr><th><label>買い物メモ</label></th>
-    <td><input name="memo" class="form-control" type="text" /></td></tr>
-    <tr><th><label>個数</label></th>
-    <td><input name="qty" class="form-control" type="number" min="0" max="25" value="0"></td></tr>
-<!--        <input name="qty" class="form-control" type="number" />-->
-    <br>
-    <tr><th><label>保管種別</label></th>
-          <td><select id="Strage_type" class="form-control" select name="type" />
-                  <option>冷凍</option>
-                  <option>冷蔵</option>
-                  <option>常温</option>
-          </td></tr>
+    <tr>
+        <th><label>ストック名</label></th>
+        <td><input name="stock" class="form-control" type="text" /></td>
+    </tr>
+    <tr>
+        <th><label>買い物メモ</label></th>
+        <td><input name="memo" class="form-control" type="text" /></td>
+    </tr>
+    <tr>
+        <th><label>個数</label></th>
+        <td><input name="qty" class="form-control" type="number" min="0" max="25" value="0" /></td>
+    </tr>
+    <tr>
+        <th><label>保管種別</label></th>
+        <td>
+            <select id="Strage_type" class="form-control" name="type">
+<!--
+  <option>クリックで選択</option>-->
+              <option>冷凍</option>
+              <option>冷蔵</option>
+              <option>常温</option>
+            </select>
+        </td>
+    </tr>
   </table><br>
   <input type="submit" value="登録" />
 </table>
@@ -56,87 +66,46 @@
 
 
 <div class="stocklist">
-  <h2>ストック一覧</h2>
-  <table class="table table-striped">
-  <thead>
-  <tr>
-    <th>ID</th><th>ストック</th><th>メモ</th><th>個数</th><th>保管種別</th>
-  </tr>
-<!--    <th style="colspan:2">更新・削除</th>-->
-  </thead>
-    <tbody>
-        <tr th:each="stock : ${stockList}">
-          <td th:text="${stock.id}"></td>
-          <td th:text="${stock.stock}"></td>
-          <td><div class="form-control" input name="stock.memo" th:text=${stock.memo} type="text"></div></td>
-          <td><input class="spinner-container" type="number" min="0" max="25" th:value="${stock.qty}"></input>
-<!--              <input class="spinner-container" type="number" min="0" max="25" value="th:text='${stock.qty}'">-->
-<!--          <input name="stock.qty" class="form-control" type="number" />-->
-          <!--                  <span class="spinner-sub disabled">-</span>-->
-<!--              <input class="spinner" type="number" min="0" max="25" value="${stock.qty}"></input>-->
-<!--                  <span class="spinner-add">+</span>-->
-              </input>
-              <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script></td>
-          <td width="80px" th:text="${stock.type}"></td>
-          <td width="80px">
-<!--                <button type="submit" class="btn btn-primary" id="update_buttom" onclick="-->
-<!--                    let row = this.parentElement.parentElement;-->
-<!--                    getElementById('update_id').value=row.cells[0].firstChild.data;-->
-<!--                    getElementById('update_stock').value=row.cells[1].firstChile.data;-->
-<!--                    getElementById('update_memo').value=row.cells[2].firstChile.data;-->
-<!--                    getElementById('update_qty').value=row.cells[3].firstChile.data;-->
-<!--                    getElementById('update_type').value=row.cells[4].firstChile.data;-->
-<!--                    var dialog = getElementById('updateDialog');-->
-<!--                    dialog.style.left = ((window.innerWidth - 500) /2) + 'px';-->
-<!--                    dialog.style.display = 'block';-->
-<!--                    ">変更</button>-->
-                <form action="/update">
-                    <button type="submit" class="btn btn-primary" id="update_buttom">変更</button>
-                    <input type="hidden" name="id" th:value="${stock.id}"/>
-                </form>
-          </td>
-          <td width="80px">
-            <form action="/delete">
-                <button type="submit" class="btn btn-primary" id="delete_buttom">削除</button>
-                <input type="hidden" name="id" th:value="${stock.id}"/>
-            </form>
-          </td>
+    <h2>ストック一覧</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>ストック</th>
+            <th>メモ</th>
+            <th>個数</th>
+            <th>保管種別</th>
         </tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <tr th:each="stock : ${stockList}">
+            <form>
+                <td>
+                    <input name="id" readonly="readonly" th:value="${stock.id}" />
+                </td>
+                <td>
+                    <input name="stock" th:value="${stock.stock}" />
+                </td>
+                <td width="350px">
+                    <input name="memo" type="text" th:value="${stock.memo}" />
+                </td>
+                <td>
+                    <input class="spinner-container" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${stock.qty}" />
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                </td>
+                <td width="100px">
+                    <input name="type" th:value="${stock.type}" />
+                </td>
+                <td width="160px">
+                    <button type="submit" class="btn btn-primary" id="update_buttom"
+                            onclick="action='/update'; submit();">変更</button>
+                    <button type="submit" class="btn btn-primary" id="delete_buttom"
+                            onclick="action='/delete'; submit();">削除</button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<!--<div id="updateDialog" >-->
-<!--    <div class="stock_form">-->
-<!--&lt;!&ndash;        <div class="modal-content">&ndash;&gt;-->
-<!--&lt;!&ndash;               <div class="modal-header">&ndash;&gt;-->
-<!--                    <h2>ストックの更新</h2>-->
-<!--                    <form action="/update">-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="modal-body">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <input id="update_id" name="id" type="hidden"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <label for="update_stock">ストック</label>&ndash;&gt;-->
-<!--                    <input id="update_id"  name="id" type="hidden"/>-->
-<!--                    <label>ストック</label>-->
-<!--                    <input id="update_stock"  name="stock" type="text"/>-->
-<!--                    <label>メモ</label>-->
-<!--                    <input id="update_memo" name="memo" type="text"/>-->
-<!--                    <label>個数</label>-->
-<!--                    <input id="update_qty"  name="qty" type="number"/></select>-->
-<!--                    <label>保管種別</label>-->
-<!--                    <select id="update_type" class="form-select" name="type" type="text"/>-->
-<!--                        <option>冷凍</option>-->
-<!--                        <option>冷蔵</option>-->
-<!--                        <option>常温</option>-->
-<!--                    </select>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="submit" class="btn btn-primary">更新</button>-->
-<!--                    <button type="reset"  class="btn btn-primary"-->
-<!--                            onclick="getElementById('updateDialog').style.display='none';">キャンセル</button>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--    </div>-->
-<!--</div>-->
 </body>
 </html>
-
-

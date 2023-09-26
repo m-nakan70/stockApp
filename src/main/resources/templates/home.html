@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <th><label>個数</label></th>
-        <td><input name="qty" class="form-control" type="number" min="0" max="25" value="0" /></td>
+        <td><input name="qty" class="form-control" type="number" min="0" max="25" value=" " /></td>
     </tr>
     <tr>
         <th><label>保管種別</label></th>
@@ -32,6 +32,7 @@
             <select id="Strage_type" class="form-control" name="type">
 <!--
   <option>クリックで選択</option>-->
+              <option>    </option>
               <option>冷凍</option>
               <option>冷蔵</option>
               <option>常温</option>
@@ -81,10 +82,12 @@
         <tr th:each="stock : ${stockList}">
             <form>
                 <td>
-                    <input name="id" readonly="readonly" th:value="${stock.id}" />
+                    <span th:text="${stock.id}" />
+                    <input type="hidden" name="id" th:value="${stock.id}" />
                 </td>
                 <td>
-                    <input name="stock" th:value="${stock.stock}" />
+                    <span th:text="${stock.stock}" />
+                    <input type="hidden" name="stock" th:value="${stock.stock}" />
                 </td>
                 <td width="350px">
                     <input name="memo" type="text" th:value="${stock.memo}" />
@@ -94,7 +97,8 @@
                     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
                 </td>
                 <td width="100px">
-                    <input name="type" th:value="${stock.type}" />
+                    <span th:text="${stock.type}" />
+                    <input type="hidden" name="type" th:value="${stock.type}" />
                 </td>
                 <td width="160px">
                     <button type="submit" class="btn btn-primary" id="update_buttom"

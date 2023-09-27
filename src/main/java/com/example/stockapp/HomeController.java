@@ -31,6 +31,25 @@ public class HomeController {
         model.addAttribute("time", LocalDateTime.now());
         return "hello";
     }
+    @GetMapping("/registration")
+    String regItems(Model model){
+        List<StockItem>stockItems = dao.findAll();
+        model.addAttribute("stockList", stockItems);
+        return "registration";
+    }
+    @GetMapping("/daily")
+    String daylyItems(Model model){
+        List<StockItem>stockItems = dao.findAll();
+        model.addAttribute("stockList", stockItems);
+        return "daily";
+    }
+
+    @GetMapping("/emergency")
+    String emergencyItems(Model model){
+        List<StockItem>stockItems = dao.findAll();
+        model.addAttribute("stockList", stockItems);
+        return "emergency";
+    }
     @GetMapping("/add")
     String addItem(@RequestParam("stock") String stock,
                    @RequestParam("memo") String memo,

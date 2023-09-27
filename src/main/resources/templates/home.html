@@ -8,9 +8,17 @@
 </head>
 
 <body>
-<h1>ストック管理アプリケーション</h1>
-<div class="stock_form">
-  <h2>ストックの登録</h2>
+<nav class="nav nav-pills nav-justified">
+    <a class="nav-link active" aria-current="page">食品</a>
+    <a class="nav-link" th:href="@{/daily}">日用品</a>
+    <a class="nav-link" th:href="@{/emergency}">防災備蓄</a>
+    <a class="nav-link" th:href="@{/registration}">登録</a>
+</nav>
+<br>
+
+<h3>ストック管理アプリケーション</h3>
+<div class="stock_form" id="reg">
+  <h4>ストックの登録</h4>
 <form action="/add">
 <table class=" ">
   <table>
@@ -24,7 +32,7 @@
     </tr>
     <tr>
         <th><label>個数</label></th>
-        <td><input name="qty" class="form-control" type="number" min="0" max="25" value=" " /></td>
+        <td><input name="qty" class="form-control" type="number" min="0" max="25" value="" /></td>
     </tr>
     <tr>
         <th><label>保管種別</label></th>
@@ -40,35 +48,17 @@
         </td>
     </tr>
   </table><br>
-  <input type="submit" value="登録" />
+    <button type="submit" class="btn btn-primary" id="add_buttom"
+            onclick="action='/add'; submit();">登録</button>
+<!--  <input type="submit" value="登録" />-->
 </table>
 </form>
 </div>
 <br><br>
-<!--<tr>-->
-<!--  <th>ストック名</th>-->
-<!--  <td><input name="stock" class="form-control" type="text" id="new_stock" /></td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--  <th>買い物メモ</th>-->
-<!--  <td><input name="memo" class="form-control" type="text" id="new_memo" /></td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--  <th>個数</th>-->
-<!--  <td><input name="qty" class="form-control" type="text" id="new_qty" /></td><br>-->
-<!--</tr><br>-->
-<!--</table>-->
-<!--  <input type="submit" value="登録"  />-->
-<!--  -->
-<!--  <label class="form-label">ストック</label>-->
-<!--  <input name="stock" class="form-control" type="text" id="new_stock" /><br>-->
-<!--  <label class="form-label">個数</label>-->
-<!--  <input name="qty" class="form-control" type="text" id="new_qty"/>-->
-
 
 <div class="stocklist">
-    <h2>ストック一覧</h2>
-    <table class="table table-striped">
+    <h2>食品ストック一覧</h2>
+    <table class="table table-striped" id="food">
         <thead>
         <tr>
             <th>ID</th>
@@ -94,7 +84,6 @@
                 </td>
                 <td>
                     <input class="spinner-container" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${stock.qty}" />
-                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
                 </td>
                 <td width="100px">
                     <span th:text="${stock.type}" />

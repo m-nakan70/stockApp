@@ -37,13 +37,23 @@
     <tr>
         <th><label>保管種別</label></th>
         <td>
-            <select id="Strage_type" class="form-control" name="type">
+            <select id="strage_type" class="form-control" name="type">
 <!--
   <option>クリックで選択</option>-->
               <option>    </option>
               <option>冷凍</option>
               <option>冷蔵</option>
               <option>常温</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label>使用可否</label></th>
+        <td>
+            <select id="strage_uby" class="form-control" name="uby">
+                <option>    </option>
+                <option>使用可</option>
+                <option>使用不可</option>
             </select>
         </td>
     </tr>
@@ -66,30 +76,35 @@
             <th>メモ</th>
             <th>個数</th>
             <th>保管種別</th>
+            <th>使用可否</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="stock : ${stockList}">
             <form>
-                <td>
+                <td width="80px">
                     <span th:text="${stock.id}" />
                     <input type="hidden" name="id" th:value="${stock.id}" />
                 </td>
-                <td>
+                <td width="150px">
                     <span th:text="${stock.stock}" />
                     <input type="hidden" name="stock" th:value="${stock.stock}" />
                 </td>
-                <td width="350px">
+                <td width="120px">
                     <input name="memo" type="text" th:value="${stock.memo}" />
                 </td>
-                <td>
+                <td width="80px">
                     <input class="spinner-container" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${stock.qty}" />
                 </td>
-                <td width="100px">
+                <td width="80px">
                     <span th:text="${stock.type}" />
                     <input type="hidden" name="type" th:value="${stock.type}" />
                 </td>
-                <td width="160px">
+                <td width="100px">
+                    <span th:text="${stock.uby}" />
+                    <input type="hidden" name="uby" th:value="${stock.uby}" />
+                </td>
+                <td width="100px">
                     <button type="submit" class="btn btn-primary" id="update_buttom"
                             onclick="action='/update'; submit();">変更</button>
                     <button type="submit" class="btn btn-primary" id="delete_buttom"

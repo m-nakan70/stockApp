@@ -3,5 +3,6 @@ CREATE TABLE IF NOT EXISTS foodlist(
     stock VARCHAR(256),
     memo VARCHAR(256),
     qty VARCHAR(8),
-    type VARCHAR(128)
+    type VARCHAR(128),
+    uby VARCHAR(8)
 );

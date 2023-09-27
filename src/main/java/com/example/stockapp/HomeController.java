@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Controller
 public class HomeController {
     private final StockAppDao dao;
-    record StockItem(String id, String stock, String memo,String qty, String type ){}
+    record StockItem(String id, String stock, String memo,String qty, String type, String uby){}
     private List<StockItem> stockItems = new ArrayList<>();
 
     @Autowired
@@ -54,9 +54,10 @@ public class HomeController {
     String addItem(@RequestParam("stock") String stock,
                    @RequestParam("memo") String memo,
                    @RequestParam("qty") String qty,
-                   @RequestParam("type") String type){
+                   @RequestParam("type") String type,
+                   @RequestParam("uby") String uby){
         String id = UUID.randomUUID().toString().substring(0,8);
-        StockItem item = new StockItem(id, stock, memo, qty, type);
+        StockItem item = new StockItem(id, stock, memo, qty, type, uby);
         dao.add(item);
 
         return "redirect:/list";
@@ -77,14 +78,13 @@ public class HomeController {
                       @RequestParam("stock") String stock,
                       @RequestParam("memo") String memo,
                       @RequestParam("qty") String qty,
-                      @RequestParam("type") String type) {
-        StockItem stockItem = new StockItem(id, stock, memo, qty, type);
+                      @RequestParam("type") String type,
+                      @RequestParam("uby") String uby){
+        StockItem stockItem = new StockItem(id, stock, memo, qty, type, uby);
         dao.update(stockItem);
         return "redirect:/list";
     }
 }
-
-
 
 
 //        return """

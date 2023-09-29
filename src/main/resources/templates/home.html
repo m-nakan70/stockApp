@@ -52,8 +52,8 @@
         <td>
             <select id="strage_uby" class="form-control" name="uby">
                 <option>    </option>
-                <option>使用可</option>
-                <option>使用不可</option>
+                <option>可</option>
+                <option>不可</option>
             </select>
         </td>
     </tr>
@@ -91,18 +91,20 @@
                     <input type="hidden" name="stock" th:value="${stock.stock}" />
                 </td>
                 <td width="120px">
-                    <input name="memo" type="text" th:value="${stock.memo}" />
+                    <input name="memo" class="form-control" type="text" th:value="${stock.memo}" />
                 </td>
                 <td width="80px">
-                    <input class="spinner-container" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${stock.qty}" />
+                    <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${stock.qty}" />
                 </td>
                 <td width="80px">
                     <span th:text="${stock.type}" />
                     <input type="hidden" name="type" th:value="${stock.type}" />
                 </td>
-                <td width="100px">
-                    <span th:text="${stock.uby}" />
-                    <input type="hidden" name="uby" th:value="${stock.uby}" />
+                <td width="80px">
+<!--                    <span th:text="${stock.uby}" />-->
+                    <select id="uby" class="form-control" name="uby" th:value="${stock.uby}"/>
+                    <option>可</option>
+                    <option>不可</option>
                 </td>
                 <td width="100px">
                     <button type="submit" class="btn btn-primary" id="update_buttom"

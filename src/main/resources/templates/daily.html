@@ -5,6 +5,49 @@
     <title>DailyNeeds</title>
 </head>
 <body>
-<h3>日用品</h3>
+<div class="dailystocklist">
+    <h3>日用品ストック一覧</h3>
+    <table class="table table-striped" id="daily">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>ストック</th>
+            <th>メモ</th>
+            <th>個数</th>
+            <th>種別</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="daily : ${dailyList}">
+            <form>
+                <td width="80px">
+                    <span th:text="${daily.id}" />
+                    <input type="hidden" name="id" th:value="${daily.id}" />
+                </td>
+                <td width="150px">
+                    <span th:text="${daily.daily}" />
+                    <input type="hidden" name="stock" th:value="${daily.daily}" />
+                </td>
+                <td width="120px">
+                    <input name="memo" class="form-control" type="text" th:value="${daily.memo}" />
+                </td>
+                <td width="80px">
+                    <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${daily.qty}" />
+                </td>
+                <td width="80px">
+                    <span th:text="${daily.type}" />
+                    <input type="hidden" name="type" th:value="${daily.type}" />
+                </td>
+                <td width="100px">
+                    <button type="submit" class="btn btn-primary" id="update_buttom"
+                            onclick="action='/dailyupdate'; submit();">変更</button>
+                    <button type="submit" class="btn btn-primary" id="delete_buttom"
+                            onclick="action='/dailydelete'; submit();">削除</button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

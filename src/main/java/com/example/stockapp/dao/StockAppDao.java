@@ -1,6 +1,7 @@
-package com.example.stockapp;
+package com.example.stockapp.dao;
 
-import com.example.stockapp.HomeController.StockItem;
+import com.example.stockapp.controller.HomeController;
+import com.example.stockapp.controller.HomeController.StockItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -25,7 +26,7 @@ public class StockAppDao{
                 .withTableName("foodlist");
         insert.execute(param);
     }
-    public List<HomeController.StockItem> findAll() {
+    public List<StockItem> findAll() {
         String query = "SELECT * FROM foodlist";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
         List<HomeController.StockItem> stockItems = result.stream()

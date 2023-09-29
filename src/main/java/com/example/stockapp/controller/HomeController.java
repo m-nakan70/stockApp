@@ -1,25 +1,23 @@
-package com.example.stockapp;
+package com.example.stockapp.controller;
 
+import com.example.stockapp.dao.StockAppDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
-    private final StockAppDao dao;
-    record StockItem(String id, String stock, String memo,String qty, String type, String uby){}
-    private List<StockItem> stockItems = new ArrayList<>();
+    public final StockAppDao dao;
+    public record StockItem(String id, String stock, String memo,String qty, String type, String uby){}
+    public List<StockItem> stockItems = new ArrayList<>();
 
     @Autowired
     HomeController(StockAppDao dao){

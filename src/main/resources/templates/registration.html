@@ -7,10 +7,10 @@
 </head>
 <body>
 <nav class="nav nav-pills nav-justified">
-    <a class="nav-link active" aria-current="page">食品</a>
+    <a class="nav-link" th:href="@{/list}">食品</a>
     <a class="nav-link" th:href="@{/daily}">日用品</a>
     <a class="nav-link" th:href="@{/emergency}">防災備蓄</a>
-    <a class="nav-link" th:href="@{/registration}">登録</a>
+    <a class="nav-link active" aria-current="page" >登録</a>
 </nav>
 <br>
 <div class="form-group">
@@ -108,11 +108,58 @@
                     </td>
                 </tr>
             </table><br>
+<!--            <button type="submit" class="btn btn-primary" id="dailyadd_buttom"-->
+<!--                    onclick="action='/dailyadd'; submit();">登録</button>-->
             <button type="submit" class="btn btn-primary" id="dailyadd_buttom"
-                    onclick="action='/dailyadd'; submit();">登録</button>
+                    onclick="action='/dailyadd' location.th:href='@{/daily}'; submit();">登録</button>
             <!--  <input type="submit" value="登録" />-->
         </table>
     </form>
-</div>
+</div><br><br>
+
+<!--<div class="dailylist">-->
+<!--    <h4>日用品ストック一覧</h4>-->
+<!--    <table class="table table-striped" id="daily">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>ストック</th>-->
+<!--            <th>メモ</th>-->
+<!--            <th>個数</th>-->
+<!--            <th>保管種別</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="daily : ${dailyList}">-->
+<!--            <form>-->
+<!--                <td width="80px">-->
+<!--                    <span th:text="${daily.id}" />-->
+<!--                    <input type="hidden" name="id" th:value="${daily.id}" />-->
+<!--                </td>-->
+<!--                <td width="150px">-->
+<!--                    <span th:text="${daily.daily}" />-->
+<!--                    <input type="hidden" name="daily" th:value="${daily.daily}" />-->
+<!--                </td>-->
+<!--                <td width="120px">-->
+<!--                    <input name="memo" class="form-control" type="text" th:value="${daily.memo}" />-->
+<!--                </td>-->
+<!--                <td width="80px">-->
+<!--                    <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${daily.qty}" />-->
+<!--                </td>-->
+<!--                <td width="80px">-->
+<!--                    <span th:text="${daily.type}" />-->
+<!--                    <input type="hidden" name="type" th:value="${daily.type}" />-->
+<!--                </td>-->
+<!--                <td width="100px">-->
+<!--                    <button type="submit" class="btn btn-primary" id="update_buttom"-->
+<!--                            onclick="action='/update'; submit();">変更</button>-->
+<!--                    <button type="submit" class="btn btn-primary" id="delete_buttom"-->
+<!--                            onclick="action='/delete'; submit();">削除</button>-->
+<!--                </td>-->
+<!--            </form>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
 </body>
 </html>

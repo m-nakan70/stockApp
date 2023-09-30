@@ -15,36 +15,37 @@ import java.util.UUID;
 
 @Controller
 public class DailyController {
-    public final DailyDao dao;
+    private final DailyDao dao;
     public record DailyItem(String id, String daily, String memo, String qty, String type){}
-    public List<DailyItem> dailyItems = new ArrayList<>();
+
+    private List<DailyItem> dailyItems = new ArrayList<>();
 
     @Autowired
     DailyController(DailyDao dao){
         this.dao = dao;
     }
-    @RequestMapping(value = "/hello")
+    @RequestMapping(value = "/hellod")
 //    @ResponseBody
     String hello(Model model){
         model.addAttribute("time", LocalDateTime.now());
         return "hello";
     }
-    @GetMapping("/registration")
+    @GetMapping("/registrationd")
     String regItems(Model model){
-        List<DailyItem>dailyItems = dao.findAllD();
+        List<DailyItem>dailyItems = dao.findAll();
         model.addAttribute("dailyList", dailyItems);
         return "registration";
     }
-    @GetMapping("/daily")
+    @GetMapping("/dailyd")
     String daylyItems(Model model){
-        List<DailyItem>dailyItems = dao.findAllD();
+        List<DailyItem>dailyItems = dao.findAll();
         model.addAttribute("dailyList", dailyItems);
         return "daily";
     }
 
-    @GetMapping("/emergency")
+    @GetMapping("/emergencyd")
     String emergencyItems(Model model){
-        List<DailyItem>emergencyItems = dao.findAllD();
+        List<DailyItem>emergencyItems = dao.findAll();
         model.addAttribute("dailyList", dailyItems);
         return "emergency";
     }
@@ -55,20 +56,20 @@ public class DailyController {
                    @RequestParam("type") String type){
         String id = UUID.randomUUID().toString().substring(0,8);
         DailyItem item = new DailyItem(id, daily, memo, qty, type);
-        dao.addD(item);
+        dao.add(item);
 
         return "redirect:/dailylist";
     }
     @GetMapping("/dailylist")
     String dailyItems(Model model){
-        List<DailyItem>daylyItems = dao.findAllD();
+        List<DailyItem> dailyItems = dao.findAll();
         model.addAttribute("dailyList", dailyItems);
         return "daily";
     }
     @GetMapping("/dailydelete")
     String deleteItem(@RequestParam("id") String id){
-        dao.deleteD(id);
-        return "redirect:/list";
+        dao.delete(id);
+        return "redirect:/daily";
     }
     @GetMapping("/dailyupdate")
     String updateItem(@RequestParam("id") String id,
@@ -77,8 +78,8 @@ public class DailyController {
                       @RequestParam("qty") String qty,
                       @RequestParam("type") String type){
         DailyItem dailyItem = new DailyItem(id, daily, memo, qty, type);
-        dao.updateD(dailyItem);
-        return "redirect:/list";
+        dao.update(dailyItem);
+        return "redirect:/dailylist";
     }
 }
 

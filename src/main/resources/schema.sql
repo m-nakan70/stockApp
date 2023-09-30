@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS dailylist(
     daily VARCHAR(256),
     memo VARCHAR(256),
     qty VARCHAR(8),
-    type VARCHAR(128),
+    type VARCHAR(128)
 );

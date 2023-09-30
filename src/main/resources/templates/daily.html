@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>DailyNeeds</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-<div class="dailystocklist">
+<nav class="nav nav-pills nav-justified">
+    <a class="nav-link" th:href="@{/list}">食品</a>
+    <a class="nav-link active" aria-current="page">日用品</a>
+    <a class="nav-link" th:href="@{/emergency}">防災備蓄</a>
+    <a class="nav-link" th:href="@{/registration}" >登録</a>
+</nav><br>
+
+<div class="daily">
     <h3>日用品ストック一覧</h3>
     <table class="table table-striped" id="daily">
         <thead>
@@ -14,7 +22,7 @@
             <th>ストック</th>
             <th>メモ</th>
             <th>個数</th>
-            <th>種別</th>
+            <th>保管種別</th>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +34,7 @@
                 </td>
                 <td width="150px">
                     <span th:text="${daily.daily}" />
-                    <input type="hidden" name="stock" th:value="${daily.daily}" />
+                    <input type="hidden" name="daily" th:value="${daily.daily}" />
                 </td>
                 <td width="120px">
                     <input name="memo" class="form-control" type="text" th:value="${daily.memo}" />

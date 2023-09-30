@@ -20,13 +20,13 @@ public class DailyDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addD(DailyItem dailyItem){
+    public void add(DailyItem dailyItem){
         SqlParameterSource param =new BeanPropertySqlParameterSource(dailyItem);
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("dailylist");
         insert.execute(param);
     }
-    public List<DailyItem> findAllD() {
+    public List<DailyItem> findAll() {
         String query = "SELECT * FROM dailylist";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
         List<DailyController.DailyItem> dailyItems = result.stream()
@@ -40,12 +40,12 @@ public class DailyDao {
 
         return  dailyItems;
     }
-    public int deleteD(String id){
+    public int delete(String id){
         int number = jdbcTemplate.update("DELETE FROM dailylist WHERE id = ?", id);
         return number;
     }
 
-    public int updateD(DailyItem dailyItem){
+    public int update(DailyItem dailyItem){
         int number = jdbcTemplate.update("UPDATE dailylist SET daily = ?, memo = ?, qty = ?, type = ? WHERE id= ?",
                 dailyItem.daily(),
                 dailyItem.memo(),

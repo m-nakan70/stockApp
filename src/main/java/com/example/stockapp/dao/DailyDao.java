@@ -35,7 +35,9 @@ public class DailyDao {
                         row.get("daily").toString(),
                         row.get("memo").toString(),
                         row.get("qty").toString(),
-                        row.get("type").toString()))
+                        row.get("type").toString(),
+                        row.get("createdAtDATETIME").toString(),
+                        row.get("updatedAtDATETIME").toString()))
                 .toList();
 
         return  dailyItems;
@@ -46,12 +48,14 @@ public class DailyDao {
     }
 
     public int update(DailyItem dailyItem){
-        int number = jdbcTemplate.update("UPDATE dailylist SET daily = ?, memo = ?, qty = ?, type = ? WHERE id= ?",
+        int number = jdbcTemplate.update("UPDATE dailylist SET daily = ?, memo = ?, qty = ?, type = ?, createdAtDATETIME = ?, updatedAtDATETIME = ?  WHERE id= ?",
                 dailyItem.daily(),
                 dailyItem.memo(),
                 dailyItem.qty(),
                 dailyItem.type(),
-                dailyItem.id());
+                dailyItem.id(),
+                dailyItem.createdAtDatetime(),
+                dailyItem.updatedAtDatetime());
         return number;
     }
 }

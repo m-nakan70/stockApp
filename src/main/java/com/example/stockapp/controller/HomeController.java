@@ -16,7 +16,12 @@ import java.util.UUID;
 @Controller
 public class HomeController {
     public final StockAppDao dao;
-    public record StockItem(String id, String stock, String memo,String qty, String type, String uby){}
+//    private String createdAtDATETIME;
+//    private String updatedAtDATETIME;
+
+    public record StockItem(String id, String stock, String memo, String qty, String type, String uby,
+                            String createdAtDatetime, String updatedAtDatetime){
+    }
     public List<StockItem> stockItems = new ArrayList<>();
 
     @Autowired
@@ -53,9 +58,11 @@ public class HomeController {
                    @RequestParam("memo") String memo,
                    @RequestParam("qty") String qty,
                    @RequestParam("type") String type,
-                   @RequestParam("uby") String uby){
+                   @RequestParam("uby") String uby,
+                   @RequestParam("createdAtDATETIME") String createdAtDATETIME,
+                   @RequestParam("updatedAtDATETIME") String updatedAtDATETIME){
         String id = UUID.randomUUID().toString().substring(0,8);
-        StockItem item = new StockItem(id, stock, memo, qty, type, uby);
+        StockItem item = new StockItem(id, stock, memo, qty, type, uby, createdAtDATETIME, updatedAtDATETIME);
         dao.add(item);
 
         return "redirect:/list";
@@ -77,8 +84,10 @@ public class HomeController {
                       @RequestParam("memo") String memo,
                       @RequestParam("qty") String qty,
                       @RequestParam("type") String type,
-                      @RequestParam("uby") String uby){
-        StockItem stockItem = new StockItem(id, stock, memo, qty, type, uby);
+                      @RequestParam("uby") String uby,
+                      @RequestParam("createdAtDATETIME") String createdAtDATETIME,
+                      @RequestParam("updatedAtDATETIME") String updatedAtDATETIME){
+        StockItem stockItem = new StockItem(id, stock, memo, qty, type, uby, createdAtDATETIME, updatedAtDATETIME);
         dao.update(stockItem);
         return "redirect:/list";
     }

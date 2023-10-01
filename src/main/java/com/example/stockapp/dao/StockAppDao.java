@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,9 @@ public class StockAppDao{
     StockAppDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+    String currentTimestampToString = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(currentTimestamp);
 
     public void add(StockItem stockItem){
         SqlParameterSource param =new BeanPropertySqlParameterSource(stockItem);
@@ -36,7 +41,9 @@ public class StockAppDao{
                         row.get("memo").toString(),
                         row.get("qty").toString(),
                         row.get("type").toString(),
-                        row.get("uby").toString()))
+                        row.get("uby").toString(),
+                        row.get("createdAtDATETIME").toString(),
+                        row.get("updatedAtDATETIME").toString()))
                 .toList();
 
         return  stockItems;
@@ -47,12 +54,10 @@ public class StockAppDao{
     }
 
     public int update(StockItem stockItem){
-        int number = jdbcTemplate.update("UPDATE foodlist SET stock = ?, memo = ?, qty = ?, type = ?, uby = ? WHERE id= ?",
-                    stockItem.stock(),
+        int number = jdbcTemplate.update("UPDATE foodlist SET  memo = ?, qty = ?, type = ?, updatedAtDATETIME = ? WHERE id= ?",
                     stockItem.memo(),
                     stockItem.qty(),
-                    stockItem.type(),
-                    stockItem.uby(),
+                    stockItem.updatedAtDatetime(),
                     stockItem.id());
         return number;
     }

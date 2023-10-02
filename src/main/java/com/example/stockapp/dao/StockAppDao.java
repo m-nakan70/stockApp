@@ -22,9 +22,6 @@ public class StockAppDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-    String currentTimestampToString = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(currentTimestamp);
-
     public void add(StockItem stockItem){
         SqlParameterSource param =new BeanPropertySqlParameterSource(stockItem);
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
@@ -41,10 +38,10 @@ public class StockAppDao{
                         row.get("memo").toString(),
                         row.get("qty").toString(),
                         row.get("type").toString(),
-                        row.get("uby").toString(),
-                        row.get("createdAtDATETIME").toString(),
-                        row.get("updatedAtDATETIME").toString()))
+                        row.get("uby").toString()))
                 .toList();
+//                row.get("created_at").toString(),
+//                row.get("updated_at").toString())
 
         return  stockItems;
     }
@@ -54,11 +51,14 @@ public class StockAppDao{
     }
 
     public int update(StockItem stockItem){
-        int number = jdbcTemplate.update("UPDATE foodlist SET  memo = ?, qty = ?, type = ?, updatedAtDATETIME = ? WHERE id= ?",
+        int number = jdbcTemplate.update("UPDATE foodlist SET stock = ?, memo = ?, qty = ?, type = ?, uby = ? WHERE id= ?",
+                    stockItem.stock(),
                     stockItem.memo(),
                     stockItem.qty(),
-                    stockItem.updatedAtDatetime(),
+                    stockItem.type(),
+                    stockItem.uby(),
                     stockItem.id());
         return number;
+//        , updated_at = ?
     }
 }

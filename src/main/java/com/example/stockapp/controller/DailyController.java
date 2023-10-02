@@ -16,7 +16,7 @@ import java.util.UUID;
 @Controller
 public class DailyController {
     private final DailyDao dao;
-    public record DailyItem(String id, String daily, String memo, String qty, String type, String createdAtDatetime, String updatedAtDatetime){}
+    public record DailyItem(String id, String daily, String memo, String qty, String type){}
 
     private List<DailyItem> dailyItems = new ArrayList<>();
 
@@ -53,16 +53,14 @@ public class DailyController {
     String addItem(@RequestParam("daily") String daily,
                    @RequestParam("memo") String memo,
                    @RequestParam("qty") String qty,
-                   @RequestParam("type") String type,
-                   @RequestParam("createdAtDATETIME") String createdAtDATETIME,
-                   @RequestParam("updatedAtDATETIME") String updatedAtDATETIME){
+                   @RequestParam("type") String type){
         String id = UUID.randomUUID().toString().substring(0,8);
-        DailyItem item = new DailyItem(id, daily, memo, qty, type, createdAtDATETIME, updatedAtDATETIME);
+        DailyItem item = new DailyItem(id, daily, memo, qty, type);
         dao.add(item);
 
-        return "redirect:/dailylist";
+        return "redirect:/dailylistd";
     }
-    @GetMapping("/dailylist")
+    @GetMapping("/dailylistd")
     String dailyItems(Model model){
         List<DailyItem> dailyItems = dao.findAll();
         model.addAttribute("dailyList", dailyItems);
@@ -71,19 +69,17 @@ public class DailyController {
     @GetMapping("/dailydelete")
     String deleteItem(@RequestParam("id") String id){
         dao.delete(id);
-        return "redirect:/dailylist";
+        return "redirect:/dailylistd";
     }
     @GetMapping("/dailyupdate")
     String updateItem(@RequestParam("id") String id,
                       @RequestParam("daily") String daily,
                       @RequestParam("memo") String memo,
                       @RequestParam("qty") String qty,
-                      @RequestParam("type") String type,
-                      @RequestParam("createdAtDATETIME") String createdAtDATETIME,
-                      @RequestParam("updatedAtDATETIME") String updatedAtDATETIME){
-        DailyItem dailyItem = new DailyItem(id, daily, memo, qty, type, createdAtDATETIME, updatedAtDATETIME);
+                      @RequestParam("type") String type){
+        DailyItem dailyItem = new DailyItem(id, daily, memo, qty, type);
         dao.update(dailyItem);
-        return "redirect:/dailylist";
+        return "redirect:/dailylistd";
     }
 }
 

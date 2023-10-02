@@ -8,7 +8,7 @@
 <body>
 <nav class="nav nav-pills nav-justified">
     <a class="nav-link" th:href="@{/list}">食品</a>
-    <a class="nav-link" th:href="@{/daily}">日用品</a>
+    <a class="nav-link" th:href="@{/dailylistd}">日用品</a>
     <a class="nav-link" th:href="@{/emergency}">防災備蓄</a>
     <a class="nav-link active" aria-current="page" >登録</a>
 </nav>
@@ -50,8 +50,6 @@
                     <th><label>保管種別</label></th>
                     <td>
                         <select id="strage_type" class="form-control" name="type">
-                            <!--
-                              <option>クリックで選択</option>-->
                             <option>    </option>
                             <option>冷凍</option>
                             <option>冷蔵</option>
@@ -68,10 +66,6 @@
                             <option>不可</option>
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td><input name="hidden" id="createdAtDATETIME" type="hidden" /></td>
-                </tr>
             </table><br>
             <button type="submit" class="btn btn-primary" id="add_buttom"
                     onclick="action='/add'; submit();">登録</button>
@@ -101,8 +95,6 @@
                     <th><label>保管種別</label></th>
                     <td>
                         <select id="strage_dailytype" class="form-control" name="type">
-                            <!--
-                              <option>クリックで選択</option>-->
                             <option>    </option>
                             <option>洗剤</option>
                             <option>紙類</option>
@@ -110,15 +102,9 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td><input name="hidden" id="updatedAtDATETIME" type="hidden" /></td>
-                </tr>
             </table><br>
-<!--            <button type="submit" class="btn btn-primary" id="dailyadd_buttom"-->
-<!--                    onclick="action='/dailyadd'; submit();">登録</button>-->
             <button type="submit" class="btn btn-primary" id="dailyadd_buttom"
                     onclick="action='/dailyadd' location.th:href='@{/daily}'; submit();">登録</button>
-            <!--  <input type="submit" value="登録" />-->
         </table>
     </form>
 </div><br><br>

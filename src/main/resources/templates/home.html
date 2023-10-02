@@ -29,40 +29,43 @@
         </thead>
         <tbody>
         <tr th:each="stock : ${stockList}">
-            <form>
-                <td width="80px">
-                    <span th:text="${stock.id}" />
-                    <input type="hidden" name="id" th:value="${stock.id}" />
-                </td>
-                <td width="150px">
-                    <span th:text="${stock.stock}" />
-                    <input type="hidden" name="stock" th:value="${stock.stock}" />
-                </td>
-                <td width="120px">
-                    <input name="memo" class="form-control" type="text" th:value="${stock.memo}" />
-                </td>
-                <td width="80px">
-                    <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${stock.qty}" />
-                </td>
-                <td width="80px">
-                    <span th:text="${stock.type}" />
-                    <input type="hidden" name="type" th:value="${stock.type}" />
-                </td>
-                <td width="80px">
-                    <select id="uby" class="form-control" name="uby" th:value="${stock.uby}"/>
-                    <option>可</option>
-                    <option>不可</option>
-                </td>
-                <td width="100px">
-                    <button type="submit" class="btn btn-primary" id="update_buttom"
-                            onclick="action='/update'; submit();">変更</button>
-                    <button type="submit" class="btn btn-primary" id="delete_buttom"
-                            onclick="action='/delete'; submit();">削除</button>
-                </td>
-            </form>
+            <!-- div th:if="${stock.type eq '冷凍'}" -->
+                <form>
+                    <td width="80px">
+                        <span th:text="${stock.id}" />
+                        <input type="hidden" name="id" th:value="${stock.id}" />
+                    </td>
+                    <td width="150px">
+                        <span th:text="${stock.stock}" />
+                        <input type="hidden" name="stock" th:value="${stock.stock}" />
+                    </td>
+                    <td width="120px">
+                        <input name="memo" class="form-control" type="text" th:value="${stock.memo}" />
+                    </td>
+                    <td width="80px">
+                        <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${stock.qty}" />
+                    </td>
+                    <td width="80px">
+                        <span th:text="${stock.type}" />
+                        <input type="hidden" name="type" th:value="${stock.type}" />
+                    </td>
+                    <td width="80px">
+                        <select id="uby" class="form-control" name="uby" th:value="${stock.uby}"/>
+                        <option>可</option>
+                        <option>不可</option>
+                    </td>
+                    <td width="100px">
+                        <button type="submit" class="btn btn-primary" id="update_buttom"
+                                onclick="action='/update'; submit();">変更</button>
+                        <button type="submit" class="btn btn-primary" id="delete_buttom"
+                                onclick="action='/delete'; submit();">削除</button>
+                    </td>
+                </form>
+            <!-- /div -->
         </tr>
         </tbody>
     </table>
+
 </div>
 </body>
 </html>

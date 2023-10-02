@@ -13,6 +13,10 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class StockAppDao{
@@ -21,6 +25,9 @@ public class StockAppDao{
     StockAppDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    final Function<StockItem, String> byType = stockItem -> stockItem.gettype();
+    final Function<StockItem, String> byTime = stockItem -> stockItem.getTime();
 
     public void add(StockItem stockItem){
         SqlParameterSource param =new BeanPropertySqlParameterSource(stockItem);
@@ -40,8 +47,9 @@ public class StockAppDao{
                         row.get("type").toString(),
                         row.get("uby").toString()))
                 .toList();
-//                row.get("created_at").toString(),
-//                row.get("updated_at").toString())
+
+        List<HomeController.StockItem> sortedStockItemByTypeandTimes =
+                stockItems.stream().sorted(comparing(byType).thenComparing(byTime)).collect(toList());
 
         return  stockItems;
     }

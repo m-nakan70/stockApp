@@ -16,8 +16,6 @@ import java.util.UUID;
 @Controller
 public class HomeController {
     public final StockAppDao dao;
-//    private String createdAtDATETIME;
-//    private String updatedAtDATETIME;
 
     public record StockItem(String id, String stock, String memo, String qty, String type, String uby){
     }
@@ -60,16 +58,16 @@ public class HomeController {
                    @RequestParam("type") String type,
                    @RequestParam("uby") String uby
                    ){
-//        @RequestParam("created_at") String created_at,
-////        @RequestParam("updated_at") String updated_at
+
         String id = UUID.randomUUID().toString().substring(0,8);
         StockItem item = new StockItem(id, stock, memo, qty, type, uby);
         dao.add(item);
-//, created_at, updated_at
+
         return "redirect:/list";
     }
     @GetMapping("/list")
     String stockItems(Model model){
+        String sql = "SELECT id FROM foodlist ORDER BY id DESC";
         List<StockItem>stockItems = dao.findAll();
         model.addAttribute("stockList", stockItems);
         return "home";
@@ -86,12 +84,10 @@ public class HomeController {
                       @RequestParam("qty") String qty,
                       @RequestParam("type") String type,
                       @RequestParam("uby") String uby){
-//        @RequestParam("created_at") String created_at,
-//        @RequestParam("updated_at") String updated_at
+
         StockItem stockItem = new StockItem(id, stock, memo, qty, type, uby);
         dao.update(stockItem);
         return "redirect:/list";
-//        created_at, updated_at
     }
 }
 

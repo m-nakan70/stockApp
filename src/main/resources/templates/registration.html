@@ -16,11 +16,11 @@
 <div class="form-group">
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="food_reg">
-        <label class="form-check-label" for="food_reg">食品</label>
+        <label class="form-check-label" a th:ref="@{food_reg}"/>食品</label>
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="daily_reg">
-        <label class="form-check-label" for="daily_reg">日用品</label>
+        <label class="form-check-label" onclick="location.th:ref='@{dailly_reg}'">日用品</label>
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="emg_reg">
@@ -34,7 +34,7 @@
     <form action="/add">
         <table class=" ">
             <table>
-                <tr>
+                 <tr>
                     <th><label>ストック名</label></th>
                     <td><input name="stock" class="form-control" type="text" /></td>
                 </tr>

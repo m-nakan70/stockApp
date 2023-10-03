@@ -26,9 +26,6 @@ public class StockAppDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    final Function<StockItem, String> byType = stockItem -> stockItem.gettype();
-    final Function<StockItem, String> byTime = stockItem -> stockItem.getTime();
-
     public void add(StockItem stockItem){
         SqlParameterSource param =new BeanPropertySqlParameterSource(stockItem);
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
@@ -36,7 +33,7 @@ public class StockAppDao{
         insert.execute(param);
     }
     public List<StockItem> findAll() {
-        String query = "SELECT * FROM foodlist";
+        String query = "SELECT * FROM foodlist ORDER BY type, times, datet";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
         List<HomeController.StockItem> stockItems = result.stream()
                 .map((Map<String, Object> row) -> new HomeController.StockItem(
@@ -47,10 +44,6 @@ public class StockAppDao{
                         row.get("type").toString(),
                         row.get("uby").toString()))
                 .toList();
-
-        List<HomeController.StockItem> sortedStockItemByTypeandTimes =
-                stockItems.stream().sorted(comparing(byType).thenComparing(byTime)).collect(toList());
-
         return  stockItems;
     }
     public int delete(String id){
@@ -67,6 +60,5 @@ public class StockAppDao{
                     stockItem.uby(),
                     stockItem.id());
         return number;
-//        , updated_at = ?
     }
 }

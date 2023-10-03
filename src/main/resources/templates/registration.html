@@ -15,21 +15,37 @@
 <br>
 <div class="form-group">
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="food_reg">
-        <label class="form-check-label" a th:ref="@{food_reg}"/>食品</label>
+        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="food_reg">
+        <label class="form-check-label" a th:ref="${/registration/{food_reg}}"/>食品</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="daily_reg">
-        <label class="form-check-label" onclick="location.th:ref='@{dailly_reg}'">日用品</label>
+        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="daily_reg">
+        <label class="form-check-label" onclick="location.th:ref='${/registration/{dailly_reg}}'">日用品</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="emg_reg">
-        <label class="form-check-label" for="emg_reg">防災備蓄</label>
+        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="emg_reg">
+        <label class="form-check-label" onclick="location.th:ref='${/registration/{emg_reg}}'">防災備蓄</label>
     </div>
 </div>
 <br>
 <!--<h3>ストック管理アプリケーション</h3>-->
 <div class="food_reg" id="reg">
+<!--  <thead>-->
+<!--    <script type="text/javascript">-->
+<!--           window.onload = function() {-->
+<!--                 document.getElementById('strage_subtype').style.display="none";-->
+<!--                            }-->
+<!--                 function selectType() {-->
+<!--                            let id = document.getElementById('strage_type').value;-->
+
+<!--                 if (id=='3')-->
+<!--                    {document.getElementById('strage_subtype').style.display="";-->
+<!--                     } else {-->
+<!--                     document.getElementById('strage_subtype').style.display="none";-->
+<!--                             }-->
+<!--                 }-->
+<!--    </script>-->
+  </thead>
     <h4>食品ストックの登録</h4>
     <form action="/add">
         <table class=" ">
@@ -50,20 +66,23 @@
                     <th><label>保管種別</label></th>
                     <td>
                         <select id="strage_type" class="form-control" name="type">
+<!--                            onchange="selectType()"-->
                             <option>    </option>
-                            <option>冷凍</option>
-                            <option>冷蔵</option>
-                            <option>常温</option>
+                            <option value="冷凍" id="1">冷凍</option>
+                            <option value="冷蔵" id="2">冷蔵</option>
+                            <option value="常温" id="3">常温</option>
                         </select>
-<!--                        <script>if(type==="常温”){-->
-<!--                                <select id="strage_subtype" class="form-control" name="subtype">-->
-<!--                                    <option>    </option>-->
-<!--                                    <option>野菜</option>-->
-<!--                                    <option>ソース・素</option>-->
-<!--                                    <option>菓子</option>-->
-<!--                                    <option>その他</option>-->
-<!--                                </select>}-->
-<!--                        </script>-->
+<!--                        <div>-->
+                        <div th:if ="id != '常温'">
+                                <select id="strage_subtype" class="form-control" name="subtype">
+                                    <option>    </option>
+                                    <option>野菜</option>
+                                    <option>ソース・素</option>
+                                    <option>菓子</option>
+                                    <option>その他</option>
+                                </select>
+<!--                        </th:if>-->
+                        </div>
                     </td>
                 </tr>
                 <tr>

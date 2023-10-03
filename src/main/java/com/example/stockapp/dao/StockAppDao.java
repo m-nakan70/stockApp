@@ -42,6 +42,7 @@ public class StockAppDao{
                         row.get("memo").toString(),
                         row.get("qty").toString(),
                         row.get("type").toString(),
+                        row.get("subtype").toString(),
                         row.get("uby").toString()))
                 .toList();
         return  stockItems;
@@ -52,11 +53,12 @@ public class StockAppDao{
     }
 
     public int update(StockItem stockItem){
-        int number = jdbcTemplate.update("UPDATE foodlist SET stock = ?, memo = ?, qty = ?, type = ?, uby = ? WHERE id= ?",
+        int number = jdbcTemplate.update("UPDATE foodlist SET stock = ?, memo = ?, qty = ?, type = ?, subtype = ?, uby = ? WHERE id= ?",
                     stockItem.stock(),
                     stockItem.memo(),
                     stockItem.qty(),
                     stockItem.type(),
+                    stockItem.subtype(),
                     stockItem.uby(),
                     stockItem.id());
         return number;

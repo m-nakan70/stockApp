@@ -17,7 +17,7 @@ import java.util.UUID;
 public class HomeController {
     public final StockAppDao dao;
 
-    public record StockItem(String id, String stock, String memo, String qty, String type, String uby){
+    public record StockItem(String id, String stock, String memo, String qty, String type, String subtype, String uby){
     }
 //    String created_at, String updated_at
     public List<StockItem> stockItems = new ArrayList<>();
@@ -56,11 +56,10 @@ public class HomeController {
                    @RequestParam("memo") String memo,
                    @RequestParam("qty") String qty,
                    @RequestParam("type") String type,
-                   @RequestParam("uby") String uby
-                   ){
-
+                   @RequestParam("subtype") String subtype,
+                   @RequestParam("uby") String uby){
         String id = UUID.randomUUID().toString().substring(0,8);
-        StockItem item = new StockItem(id, stock, memo, qty, type, uby);
+        StockItem item = new StockItem(id, stock, memo, qty, type, subtype, uby);
         dao.add(item);
 
         return "redirect:/list";
@@ -83,9 +82,10 @@ public class HomeController {
                       @RequestParam("memo") String memo,
                       @RequestParam("qty") String qty,
                       @RequestParam("type") String type,
+                      @RequestParam("subtype") String subtype,
                       @RequestParam("uby") String uby){
 
-        StockItem stockItem = new StockItem(id, stock, memo, qty, type, uby);
+        StockItem stockItem = new StockItem(id, stock, memo, qty, type, subtype, uby);
         dao.update(stockItem);
         return "redirect:/list";
     }

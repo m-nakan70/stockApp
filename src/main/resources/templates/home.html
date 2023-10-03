@@ -24,6 +24,7 @@
             <th>メモ</th>
             <th>個数</th>
             <th>保管種別</th>
+            <th>常温品種別</th>
             <th>使用可否</th>
         </tr>
         </thead>
@@ -49,9 +50,15 @@
                     <input type="hidden" name="type" th:value="${stock.type}" />
                 </td>
                 <td width="80px">
-                    <select id="uby" class="form-control" name="uby" th:value="${stock.uby}"/>
-                    <option>可</option>
-                    <option>不可</option>
+                    <span th:text="${stock.subtype}" />
+                    <input type="hidden" name="subtype" th:value="${stock.subtype}" />
+                </td>
+                <td width="80px">
+                    <span th:text="${stock.uby}" />
+                    <input type="hidden" name="uby" th:value="${stock.uby}"/>
+<!--                    <option>  </option>-->
+<!--                    <option>可</option>-->
+<!--                    <option>不可</option>-->
                 </td>
                 <td width="100px">
                     <button type="submit" class="btn btn-primary" id="update_buttom"

@@ -13,6 +13,10 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class StockAppDao{
@@ -38,11 +42,9 @@ public class StockAppDao{
                         row.get("memo").toString(),
                         row.get("qty").toString(),
                         row.get("type").toString(),
+                        row.get("subtype").toString(),
                         row.get("uby").toString()))
                 .toList();
-//                row.get("created_at").toString(),
-//                row.get("updated_at").toString())
-
         return  stockItems;
     }
     public int delete(String id){
@@ -51,14 +53,14 @@ public class StockAppDao{
     }
 
     public int update(StockItem stockItem){
-        int number = jdbcTemplate.update("UPDATE foodlist SET stock = ?, memo = ?, qty = ?, type = ?, uby = ? WHERE id= ?",
+        int number = jdbcTemplate.update("UPDATE foodlist SET stock = ?, memo = ?, qty = ?, type = ?, subtype = ?, uby = ? WHERE id= ?",
                     stockItem.stock(),
                     stockItem.memo(),
                     stockItem.qty(),
                     stockItem.type(),
+                    stockItem.subtype(),
                     stockItem.uby(),
                     stockItem.id());
         return number;
-//        , updated_at = ?
     }
 }

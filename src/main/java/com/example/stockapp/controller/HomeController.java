@@ -16,10 +16,8 @@ import java.util.UUID;
 @Controller
 public class HomeController {
     public final StockAppDao dao;
-//    private String createdAtDATETIME;
-//    private String updatedAtDATETIME;
 
-    public record StockItem(String id, String stock, String memo, String qty, String type, String uby){
+    public record StockItem(String id, String stock, String memo, String qty, String type, String subtype, String uby){
     }
 //    String created_at, String updated_at
     public List<StockItem> stockItems = new ArrayList<>();
@@ -58,18 +56,17 @@ public class HomeController {
                    @RequestParam("memo") String memo,
                    @RequestParam("qty") String qty,
                    @RequestParam("type") String type,
-                   @RequestParam("uby") String uby
-                   ){
-//        @RequestParam("created_at") String created_at,
-////        @RequestParam("updated_at") String updated_at
+                   @RequestParam("subtype") String subtype,
+                   @RequestParam("uby") String uby){
         String id = UUID.randomUUID().toString().substring(0,8);
-        StockItem item = new StockItem(id, stock, memo, qty, type, uby);
+        StockItem item = new StockItem(id, stock, memo, qty, type, subtype, uby);
         dao.add(item);
-//, created_at, updated_at
+
         return "redirect:/list";
     }
     @GetMapping("/list")
     String stockItems(Model model){
+        String sql = "SELECT id FROM foodlist ORDER BY id DESC";
         List<StockItem>stockItems = dao.findAll();
         model.addAttribute("stockList", stockItems);
         return "home";
@@ -85,13 +82,12 @@ public class HomeController {
                       @RequestParam("memo") String memo,
                       @RequestParam("qty") String qty,
                       @RequestParam("type") String type,
+                      @RequestParam("subtype") String subtype,
                       @RequestParam("uby") String uby){
-//        @RequestParam("created_at") String created_at,
-//        @RequestParam("updated_at") String updated_at
-        StockItem stockItem = new StockItem(id, stock, memo, qty, type, uby);
+
+        StockItem stockItem = new StockItem(id, stock, memo, qty, type, subtype, uby);
         dao.update(stockItem);
         return "redirect:/list";
-//        created_at, updated_at
     }
 }
 

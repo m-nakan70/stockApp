@@ -24,31 +24,31 @@ public class DailyController {
     DailyController(DailyDao dao){
         this.dao = dao;
     }
-    @RequestMapping(value = "/hellod")
+//    @RequestMapping(value = "/hellod")
 //    @ResponseBody
-    String hello(Model model){
-        model.addAttribute("time", LocalDateTime.now());
-        return "hello";
-    }
-    @GetMapping("/registrationd")
-    String regItems(Model model){
-        List<DailyItem>dailyItems = dao.findAll();
-        model.addAttribute("dailyList", dailyItems);
-        return "registration";
-    }
-    @GetMapping("/dailyd")
-    String daylyItems(Model model){
-        List<DailyItem>dailyItems = dao.findAll();
-        model.addAttribute("dailyList", dailyItems);
-        return "dailylist";
-    }
-
-    @GetMapping("/emergencyd")
-    String emergencyItems(Model model){
-        List<DailyItem>emergencyItems = dao.findAll();
-        model.addAttribute("dailyList", dailyItems);
-        return "emergency";
-    }
+//    String hello(Model model){
+//        model.addAttribute("time", LocalDateTime.now());
+//        return "hello";
+//    }
+//    @GetMapping("/registrationd")
+//    String regItems(Model model){
+//        List<DailyItem>dailyItems = dao.findAll();
+//        model.addAttribute("dailyList", dailyItems);
+//        return "registration";
+//    }
+//    @GetMapping("/dailyd")
+//    String daylyItems(Model model){
+//        List<DailyItem>dailyItems = dao.findAll();
+//        model.addAttribute("dailyList", dailyItems);
+//        return "dailylist";
+//    }
+//
+//    @GetMapping("/emergencyd")
+//    String emergencyItems(Model model){
+//        List<DailyItem>emergencyItems = dao.findAll();
+//        model.addAttribute("dailyList", dailyItems);
+//        return "emergency";
+//    }
     @GetMapping("/dailyadd")
     String addItem(@RequestParam("daily") String daily,
                    @RequestParam("memo") String memo,

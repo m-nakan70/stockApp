@@ -8,10 +8,58 @@
 <body>
 <nav class="nav nav-pills nav-justified">
     <a class="nav-link" th:href="@{/list}">食品</a>
-    <a class="nav-link" th:href="@{/daily}">日用品</a>
+    <a class="nav-link" th:href="@{/dailylistd}">日用品</a>
     <a class="nav-link active" aria-current="page">防災備蓄</a>
     <a class="nav-link" th:href="@{/registration}" >登録</a>
 </nav>
-<h3>防災備蓄</h3>
+
+<div class="emglist">
+    <h3>防災備蓄品ストック一覧</h3>
+    <table class="table table-striped" id="emergency">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>ストック</th>
+            <th>メモ</th>
+            <th>個数</th>
+            <th>保管種別</th>
+            <th>消費期限</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="emg : ${emgList}">
+            <form>
+                <td width="80px">
+                    <span th:text="${emg.id}" />
+                    <input type="hidden" name="id" th:value="${emg.id}" />
+                </td>
+                <td width="150px">
+                    <span th:text="${emg.stock}" />
+                    <input type="hidden" name="daily" th:value="${emg.stock}" />
+                </td>
+                <td width="120px">
+                    <input name="memo" class="form-control" type="text" th:value="${emg.memo}" />
+                </td>
+                <td width="80px">
+                    <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${emg.qty}" />
+                </td>
+                <td width="80px">
+                    <span th:text="${emg.type}" />
+                    <input type="hidden" name="type" th:value="${emg.type}" />
+                </td>
+                <td width="80px">
+                    <input name="exp" class="form-control" type="date" th:value="${emg.exp}" />
+                </td>
+                <td width="100px">
+                    <button type="submit" class="btn btn-primary" id="update_buttom"
+                            onclick="action='/emgupdate'; submit();">変更</button>
+                    <button type="submit" class="btn btn-primary" id="delete_buttom"
+                            onclick="action='/emgdelete'; submit();">削除</button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

@@ -13,20 +13,23 @@
     <a class="nav-link active" aria-current="page" >登録</a>
 </nav>
 <br>
-<div class="form-group">
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="food_reg">
-        <label class="form-check-label" a th:ref="${/registration/{food_reg}}"/>食品</label>
+<form>
+    <div class="form-group">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault">
+            <label onclick="location.href='food_reg'">食品</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault">
+            <label onclick="location.href='daily_reg'">日用品</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault">
+            <label onclick="location.th:href='emergency_reg'">防災備蓄</label>
+        </div>
     </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="daily_reg">
-        <label class="form-check-label" onclick="location.th:ref='${/registration/{dailly_reg}}'">日用品</label>
-    </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="emg_reg">
-        <label class="form-check-label" onclick="location.th:ref='${/registration/{emg_reg}}'">防災備蓄</label>
-    </div>
-</div>
+</form>
+
 <br>
 <!--<h3>ストック管理アプリケーション</h3>-->
 <div class="food_reg" id="reg">
@@ -38,10 +41,10 @@
                  function selectType() {
                             let id = document.getElementById('strage_type').value;
 
-                 if (value="常温"){
-                     document.getElementById('strage_subtype').style.display="";
-                     } else {
-                     document.getElementById('strage_subtype').style.display="none";
+                            if(id=='常温'){
+                                        document.getElementById('strage_subtype').style.display="";
+                             }else{
+                                        document.getElementById('strage_subtype').style.display="none";
                              }
                  }
     </script>
@@ -68,9 +71,9 @@
                       <div>
                         <select id="strage_type" class="form-control" name="type" onchange="selectType()">
                             <option>    </option>
-                            <option value="冷凍" id="1">冷凍</option>
-                            <option value="冷蔵" id="2">冷蔵</option>
-                            <option value="常温" id="3">常温</option>
+                            <option value="冷凍">冷凍</option>
+                            <option value="冷蔵">冷蔵</option>
+                            <option value="常温">常温</option>
                         </select>
                       </div>
                             <div>
@@ -79,7 +82,6 @@
                                     <option>野菜</option>
                                     <option>ソース・素</option>
                                     <option>菓子</option>
-                                    <option>その他</option>
                                 </select>
                             </div>
                     </td>

@@ -27,7 +27,7 @@ public class DailyDao {
         insert.execute(param);
     }
     public List<DailyItem> findAll() {
-        String query = "SELECT * FROM dailylist";
+        String query = "SELECT * FROM dailylist ORDER BY type, times, datet";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
         List<DailyController.DailyItem> dailyItems = result.stream()
                 .map((Map<String, Object> row) -> new DailyController.DailyItem(

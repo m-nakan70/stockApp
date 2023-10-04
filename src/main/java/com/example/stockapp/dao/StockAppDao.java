@@ -33,7 +33,7 @@ public class StockAppDao{
         insert.execute(param);
     }
     public List<StockItem> findAll() {
-        String query = "SELECT * FROM foodlist ORDER BY type, times, datet";
+        String query = "SELECT * FROM foodlist ORDER BY type, subtype, times, datet";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
         List<HomeController.StockItem> stockItems = result.stream()
                 .map((Map<String, Object> row) -> new HomeController.StockItem(

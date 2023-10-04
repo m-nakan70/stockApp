@@ -30,21 +30,21 @@
 <br>
 <!--<h3>ストック管理アプリケーション</h3>-->
 <div class="food_reg" id="reg">
-<!--  <thead>-->
-<!--    <script type="text/javascript">-->
-<!--           window.onload = function() {-->
-<!--                 document.getElementById('strage_subtype').style.display="none";-->
-<!--                            }-->
-<!--                 function selectType() {-->
-<!--                            let id = document.getElementById('strage_type').value;-->
+  <thead>
+    <script type="text/javascript">
+           window.onload = function() {
+                 document.getElementById('strage_subtype').style.display="none";
+                            }
+                 function selectType() {
+                            let id = document.getElementById('strage_type').value;
 
-<!--                 if (id=='3')-->
-<!--                    {document.getElementById('strage_subtype').style.display="";-->
-<!--                     } else {-->
-<!--                     document.getElementById('strage_subtype').style.display="none";-->
-<!--                             }-->
-<!--                 }-->
-<!--    </script>-->
+                 if (value="常温"){
+                     document.getElementById('strage_subtype').style.display="";
+                     } else {
+                     document.getElementById('strage_subtype').style.display="none";
+                             }
+                 }
+    </script>
   </thead>
     <h4>食品ストックの登録</h4>
     <form action="/add">
@@ -65,24 +65,23 @@
                 <tr>
                     <th><label>保管種別</label></th>
                     <td>
-                        <select id="strage_type" class="form-control" name="type">
-<!--                            onchange="selectType()"-->
+                      <div>
+                        <select id="strage_type" class="form-control" name="type" onchange="selectType()">
                             <option>    </option>
                             <option value="冷凍" id="1">冷凍</option>
                             <option value="冷蔵" id="2">冷蔵</option>
                             <option value="常温" id="3">常温</option>
                         </select>
-<!--                        <div>-->
-                        <div th:if ="id != '常温'">
+                      </div>
+                            <div>
                                 <select id="strage_subtype" class="form-control" name="subtype">
-                                    <option>    </option>
+                                    <option>    </option>id
                                     <option>野菜</option>
                                     <option>ソース・素</option>
                                     <option>菓子</option>
                                     <option>その他</option>
                                 </select>
-<!--                        </th:if>-->
-                        </div>
+                            </div>
                     </td>
                 </tr>
                 <tr>

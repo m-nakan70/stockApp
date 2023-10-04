@@ -9,7 +9,7 @@
 <nav class="nav nav-pills nav-justified">
     <a class="nav-link" th:href="@{/list}">食品</a>
     <a class="nav-link" th:href="@{/dailylistd}">日用品</a>
-    <a class="nav-link" th:href="@{/emergency}">防災備蓄</a>
+    <a class="nav-link" th:href="@{/emglist}">防災備蓄</a>
     <a class="nav-link active" aria-current="page" >登録</a>
 </nav>
 <br>
@@ -26,6 +26,10 @@
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="flexRadioDefault">
             <label onclick="location.th:href='emergency_reg'">防災備蓄</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault">
+            <label onclick="location.th:href='shopping_reg'">買い物メモ</label>
         </div>
     </div>
 </form>
@@ -137,50 +141,44 @@
         </table>
     </form>
 </div><br><br>
-
-<!--<div class="dailylist">-->
-<!--    <h4>日用品ストック一覧</h4>-->
-<!--    <table class="table table-striped" id="daily">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>ID</th>-->
-<!--            <th>ストック</th>-->
-<!--            <th>メモ</th>-->
-<!--            <th>個数</th>-->
-<!--            <th>保管種別</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="daily : ${dailyList}">-->
-<!--            <form>-->
-<!--                <td width="80px">-->
-<!--                    <span th:text="${daily.id}" />-->
-<!--                    <input type="hidden" name="id" th:value="${daily.id}" />-->
-<!--                </td>-->
-<!--                <td width="150px">-->
-<!--                    <span th:text="${daily.daily}" />-->
-<!--                    <input type="hidden" name="daily" th:value="${daily.daily}" />-->
-<!--                </td>-->
-<!--                <td width="120px">-->
-<!--                    <input name="memo" class="form-control" type="text" th:value="${daily.memo}" />-->
-<!--                </td>-->
-<!--                <td width="80px">-->
-<!--                    <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${daily.qty}" />-->
-<!--                </td>-->
-<!--                <td width="80px">-->
-<!--                    <span th:text="${daily.type}" />-->
-<!--                    <input type="hidden" name="type" th:value="${daily.type}" />-->
-<!--                </td>-->
-<!--                <td width="100px">-->
-<!--                    <button type="submit" class="btn btn-primary" id="update_buttom"-->
-<!--                            onclick="action='/update'; submit();">変更</button>-->
-<!--                    <button type="submit" class="btn btn-primary" id="delete_buttom"-->
-<!--                            onclick="action='/delete'; submit();">削除</button>-->
-<!--                </td>-->
-<!--            </form>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
+<div class="emergency_reg" id="emg_reg">
+    <h4>防災備蓄品ストックの登録</h4>
+    <form action="/emgadd">
+        <table class=" ">
+            <table>
+                <tr>
+                    <th><label>ストック名</label></th>
+                    <td><input name="stock" class="form-control" type="text" /></td>
+                </tr>
+                <tr>
+                    <th><label>買い物メモ</label></th>
+                    <td><input name="memo" class="form-control" type="text" /></td>
+                </tr>
+                <tr>
+                    <th><label>個数</label></th>
+                    <td><input name="qty" class="form-control" type="number" min="0" max="25" value="" /></td>
+                </tr>
+                <tr>
+                    <th><label>保管種別</label></th>
+                    <td>
+                        <select id="emg_type" class="form-control" name="type">
+                            <option>    </option>
+                            <option>飲料</option>
+                            <option>食料</option>
+                            <option>ガス・電気</option>
+                            <option>備品</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                        <th><label>消費期限</label></th>
+                        <td><input name="exp" class="form-control" type="date" /></td>
+                </tr>
+            </table><br>
+            <button type="submit" class="btn btn-primary" id="emgadd_buttom"
+                    onclick="action='/emgadd' location.th:href='@{/emergency}'; submit();">登録</button>
+        </table>
+    </form>
+</div><br><br>
 </body>
 </html>

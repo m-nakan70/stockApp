@@ -22,7 +22,7 @@ public class SendMailController {
     @RequestMapping(value="/sendmail", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<String> sendmail(@RequestBody MemoForm form) {
-        String body ="買い物メモ："+ form.getMessage();
+        String body ="買い物メモ: \n "+ form.getMessage();
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("mio701@hotmail.com");
         msg.setTo("mio.nakanishi70@gmail.com");//適宜変更

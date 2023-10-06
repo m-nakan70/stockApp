@@ -182,17 +182,47 @@
                     onclick="action='/emgadd' location.th:href='@{/emergency}'; submit();">登録</button>
         </table>
     </form>
-            <br><br>
+</div><br><br>
 <div class="shopping-memo" id="memo_reg">
       <h5>買い物メモ</h5>
-          <form action="/memosend">
-                 <tr>
-                    <td><input name="shopping-memo"class="form-control" type="text" style="width:850px; height:80px;"/></td>
-                 </tr>
-                    <button type="submit" class="btn btn-success" id="memosend_buttom"
-                      onclick="action='/memosend' submit();">送信</button>
-          </form>
+        <div><form name="memoform" id="memoform" role="form">
+            <tr>
+                <td><input name="message" class="form-control" type="text" style="width:850px; height:80px;"/></td>
+            </tr>
+            <button type="submit" class="btn btn-success"
+                    name="btnsubmit" id="btnSend">送信</button>
+        </form>
+        </div>
+        <script>
+                $(document).ready(function() {
+                 $('#btnSend').click(function() {
+                    $("#btnSend").prop("disabled", true);
+                  // フォームのデータをJSONに変換
+                    var rawData = $('#memoform').serializeArray();
+                    var data = {};
+                    jQuery.each(rawData, function(i, e) {
+                    data[e.name] = e.value;
+                });
+                // Ajaxを使ってメールを送信
+                $.ajax({
+                    type: "POST",
+                    url: "./sendmail",
+                    dataType: "json",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    scriptCharset: 'utf-8',
+                    success: function(outdata, dataType) {
+                    if (outdata[0] == "OK") alert("メール送信しました");
+                     $("#btnSend").prop("disabled", false);
+                     },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Error : " + errorThrown);
+                    $("#btnSend").prop("disabled", false);
+                            }
+                        });
+                     });
+                });
+            </script>
 </div>
-</div><br><br>
 </body>
 </html>

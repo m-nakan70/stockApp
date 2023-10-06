@@ -89,7 +89,6 @@ public class HomeController {
         dao.update(stockItem);
         return "redirect:/list";
     }
-
 }
 
 

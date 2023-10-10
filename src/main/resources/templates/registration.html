@@ -15,7 +15,7 @@
     <a class="nav-link" th:href="@{/emglist}">防災備蓄</a>
     <a class="nav-link active" aria-current="page" >登録</a>
 </nav><br><br>
-            <div>
+            <div class="tab" id="tab">
                 <input type="button" button class="btn btn-danger" onclick="location.href='#reg'" value="食品">
                 <input type="button" button class="btn btn-success" onclick="location.href='#d_reg'" value="日用品">
                 <input type="button" button class="btn btn-warning" onclick="location.href='#emg_reg'" value="防災備蓄品">
@@ -96,7 +96,7 @@
                     onclick="action='/add'; submit();">登録</button>
                 </span>
 <!--                <div class="d-grid gap-2 d-md-flex justify-content-md-end">-->
-                <a class="btn btn-outline-info" role="button" onclick="history.back(-1)" >△</a>
+                <a class="btn btn-outline-info" role="button" onclick="location.href='#tab'" >△</a>
 <!--                </div>-->
               </div>
         </table>
@@ -138,7 +138,7 @@
                  <button type="submit" class="btn btn-primary" id="dailyadd_buttom"
                     onclick="action='/dailyadd' location.th:href='@{/daily}'; submit();">登録</button>
                  </span>
-                　<a class="btn btn-outline-info" role="button" onclick="history.back(-1)" >△</a>
+                　<a class="btn btn-outline-info" role="button" onclick="location.href='#tab'" >△</a>
             </div>
             </table>
     </form>
@@ -183,7 +183,7 @@
              <button type="submit" class="btn btn-primary" id="emgadd_buttom"
                     onclick="action='/emgadd' location.th:href='@{/emergency}'; submit();">登録</button>
              </span>
-             <a class="btn btn-outline-info" role="button" onclick="history.back(-1)" >△</a>
+             <a class="btn btn-outline-info" role="button" onclick="location.href='#tab'" >△</a>
             </div>
         </table>
     </form>

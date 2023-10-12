@@ -58,6 +58,7 @@ public class DailyController {
         DailyItem item = new DailyItem(id, daily, memo, qty, type);
         dao.add(item);
 
+
         return "redirect:/dailylistd";
     }
     @GetMapping("/dailylistd")

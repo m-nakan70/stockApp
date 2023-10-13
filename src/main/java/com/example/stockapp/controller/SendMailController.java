@@ -28,8 +28,8 @@ public class SendMailController {
     public List<String> sendmail(@RequestBody MemoForm form) {
         String body = "買い物メモ: \n " + form.getMessage();
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("mio701@hotmail.com");
-        msg.setTo("mio.nakanishi70@gmail.com");//適宜変更
+        msg.setFrom("");
+        msg.setTo("");//適宜変更
         msg.setSubject("買い物メモ");
         msg.setText("買って来て欲しいもの\n\n--------------------------\n" + body + "\n---------------------------");
         mailSender.send(msg);
@@ -39,8 +39,8 @@ public class SendMailController {
         @GetMapping("/")
         public String sendNotify() {
             SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setFrom("mio.nakanishi70@gmail.com"); // 送信元メールアドレス
-            msg.setTo("mio.nakanishi70@gmail.com"); // 送信先メールアドレス
+            msg.setFrom(""); // 送信元メールアドレス
+            msg.setTo(""); // 送信先メールアドレス
 //        msg.setCc(); //Cc用
 //        msg.setBcc(); //Bcc用
             msg.setSubject("賞費期限のお知らせ"); // タイトル

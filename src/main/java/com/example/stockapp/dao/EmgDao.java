@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,12 +64,6 @@ public class EmgDao {
                 emgItem.exp(),
                 emgItem.id());
         return number;
-    }
-
-    @Getter
-    @Setter
-    class sendNotify {
-         String exp;
     }
 //
 //    @Scheduled(cron = "${cron.cron1}")

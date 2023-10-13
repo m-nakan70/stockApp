@@ -1,22 +1,77 @@
 package com.example.stockapp.controller;
+import com.example.stockapp.controller.SendMailController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+import lombok.Getter;
+import lombok.Setter;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+//@Component
+//public class NotifyTimer {
+//
+//        private static final Logger log = LoggerFactory.getLogger(NotifyTimer.class);
+//
+//        private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+//
+//        @Scheduled(fixedRate = 5000)
+//        public void reportCurrentTime() {
+//            log.info("The time is now {}", dateFormat.format(new Date()));
+//        }
+//    }
 
+
+@Getter
+@Setter
+class sendNotify {
+    String exp;
+}
 @Component
 public class NotifyTimer {
+
     static int i = 1;
 
     @Scheduled(cron = "${cron.cron1}")
-        public void doSomething() {
-             System.out.println(i + "回目タスク開始" + new Date());
-             i= i + 1;
-             System.out.println(i + "回目タスク開始" + new Date());
+    public void doSomething() {
+        System.out.println(i + "回目タスク開始" + new Date());
+        i = i + 1;
+        System.out.println(i + "回目タスク開始" + new Date());
     }
-
 }
+//    @Scheduled(cron = "${cron.cron2}")
+//    public void sendnotify() {
+//        //日時を格納するためのDateクラスを宣言(現在時刻)
+//        Date date = new Date();
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(date);
+//
+//        String exp = new exp();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date exp = dateFormat.parse(exp);
+//
+//        Date exp =
+//
+//
+//
+////        //Date型の持つ日時の4年後を表示(日時の加算)
+//        calendar.add(Calendar.YEAR, 4);
+//        date = calendar.getTime();
+//        System.out.println(date);
+//
+//        //Date型の持つ日時の3日前を表示(日時の減算)
+//        calendar.add(Calendar.DAY_OF_MONTH, -3);
+//        date = calendar.getTime();
+//        System.out.println(date);
+//
+//    }
+
+
 
 //import java.text.SimpleDateFormat;
 //import java.util.Date;

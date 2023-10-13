@@ -24,31 +24,7 @@ public class EmgController {
     EmgController(EmgDao dao){
         this.dao = dao;
     }
-//    @RequestMapping(value = "/helloe")
-//    @ResponseBody
-//    String hello(Model model){
-//        model.addAttribute("time", LocalDateTime.now());
-//        return "hello";
-//    }
-//    @GetMapping("/registration")
-//    String regItems(Model model){
-//        List<EmgItem>emgItems = dao.findAll();
-//        model.addAttribute("emgList", emgItems);
-//        return "registration";
-//    }
-//    @GetMapping("/daily")
-//    String daylyItems(Model model){
-//        List<DailyItem>dailyItems = dao.findAll();
-//        model.addAttribute("dailyList", dailyItems);
-//        return "dailylist";
-//    }
-//
-//    @GetMapping("/emergencyd")
-//    String emergencyItems(Model model){
-//        List<DailyItem>emergencyItems = dao.findAll();
-//        model.addAttribute("dailyList", dailyItems);
-//        return "emergency";
-//    }
+
     @GetMapping("/emgadd")
     String addItem(@RequestParam("stock") String stock,
                    @RequestParam("memo") String memo,

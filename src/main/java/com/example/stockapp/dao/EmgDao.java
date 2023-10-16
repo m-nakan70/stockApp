@@ -17,11 +17,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
 @Service
 @Component
+@Getter
+@Setter
 public class EmgDao {
     private final JdbcTemplate jdbcTemplate;
-
     @Autowired
     EmgDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -65,7 +68,40 @@ public class EmgDao {
                 emgItem.id());
         return number;
     }
+
+//    public <LIst> List<EmgController.EmgItem> sendnotify(String exp){
+//        StringBuilder query = new StringBuilder("SELECT * FROM  + emglist");
+//        boolean isExp = (exp != null && exp != "");   //Expに検索条件が入っているかのフラグ
+//        if(isExp){
+//            query.append("SELECT exp <= CURDATE() +3 month" );
+//        }
 //
+//        List<Map<String, Object>> result = this.jdbcTemplate.queryForList(query.toString());
+//        List<EmgController.EmgItem> list = getResult(result);
+//
+//        return list;
+//    }
+}
+
+//    /**
+//     * データベースからの取得処理を１つのメソッドにまとめておくと、修正も少なくてGood
+//     * @param result
+//     * @return
+//     */
+//    private List<HomeController.TaskItem> getResult(List<Map<String, Object>> result){
+//        List<HomeController.TaskItem> list = result.stream().map(
+//                (Map<String, Object> row) -> new HomeController.TaskItem(
+//                        row.get("id").toString(),
+//                        row.get("task").toString(),
+//                        row.get("deadline").toString(),
+//                        row.get("memo").toString(),
+//                        (Boolean)row.get("done")
+//
+//                )).toList();
+//        return list;
+//    }
+//}
+////
 //    @Scheduled(cron = "${cron.cron1}")
 //    public void sendnotify(String exp){
 //
@@ -84,7 +120,7 @@ public class EmgDao {
 //            }
 //        }
 
-}
+
 
 
 

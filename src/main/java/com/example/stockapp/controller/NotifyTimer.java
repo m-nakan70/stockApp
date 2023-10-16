@@ -25,12 +25,6 @@ import org.springframework.stereotype.Component;
 //        }
 //    }
 
-
-@Getter
-@Setter
-class sendNotify {
-    String exp;
-}
 @Component
 public class NotifyTimer {
 
@@ -112,4 +106,8 @@ public class NotifyTimer {
 //
 //    }
 //}
-
+//@Getter
+//@Setter
+//class sendNotify {
+//    String exp;
+//}

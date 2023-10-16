@@ -36,25 +36,25 @@ public class SendMailController {
         return Arrays.asList("OK");
     }
 
-//        @GetMapping("/")
-//        @ResponseBody
-//        public String sendNotify(@RequestBody EmgDao dao) {
-//            SimpleMailMessage msg = new SimpleMailMessage();
-//            String text =  "賞味期限: " + dao.exp + "ストック名:" + dao.stock();
-//            msg.setFrom("");// 送信元メールアドレス
-//            msg.setTo(" "); // 送信先メールアドレス
-////        msg.setCc(); //Cc用
-////        msg.setBcc(); //Bcc用
-//            msg.setSubject("賞費期限のお知らせ"); // タイトル
-//            msg.setText("text"); //本文
-//
-//            try {
-//                mailSender.send(msg);
-//            } catch (MailException e) {
-//                e.printStackTrace();
-//            }
-//            return "賞味期限通知";
-//        }
+        @GetMapping("/")
+        @ResponseBody
+        public String sendNotify(@RequestBody EmgDao dao) {
+            SimpleMailMessage msg = new SimpleMailMessage();
+            String text =  "賞味期限:r/n/  ストック名: r/n/";
+            msg.setFrom("");// 送信元メールアドレス
+            msg.setTo(" "); // 送信先メールアドレス
+//        msg.setCc(); //Cc用
+//        msg.setBcc(); //Bcc用
+            msg.setSubject("賞費期限のお知らせ"); // タイトル
+            msg.setText("text"); //本文
+
+            try {
+                mailSender.send(msg);
+            } catch (MailException e) {
+                e.printStackTrace();
+            }
+            return "賞味期限通知";
+        }
     }
 
 

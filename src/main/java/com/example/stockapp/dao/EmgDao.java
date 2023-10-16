@@ -69,18 +69,27 @@ public class EmgDao {
         return number;
     }
 
-//    public <LIst> List<EmgController.EmgItem> sendnotify(String exp){
-//        StringBuilder query = new StringBuilder("SELECT * FROM  + emglist");
-//        boolean isExp = (exp != null && exp != "");   //Expに検索条件が入っているかのフラグ
-//        if(isExp){
-//            query.append("SELECT exp <= CURDATE() +3 month" );
-//        }
-//
-//        List<Map<String, Object>> result = this.jdbcTemplate.queryForList(query.toString());
-//        List<EmgController.EmgItem> list = getResult(result);
-//
-//        return list;
-//    }
+    // データベースを検索し、賞味期限が残り3カ月を切ったもの,賞味期限のものを検索する
+    public <LIst> List<EmgController.EmgItem> checkexp(String exp){
+        StringBuilder query = new StringBuilder("SELECT * FROM  + emglist");
+        boolean isExp = (exp != null && exp != "");   //Expに検索条件が入っているかのフラグ
+        if(isExp){
+            query.append("SELECT *FROM emglist WHERE exp < CURDATE() +3 month or exp = CURDATE()");
+        }
+        // 検索して見つかったモノのレコード１件ごとに以下の処理を繰り返す。
+        List<Map<String, Object>> result = this.jdbcTemplate.queryForList(query.toString());
+        List<EmgController.EmgItem> list = result.stream().map(
+                (Map<String, Object> row) -> new EmgController.EmgItem(
+                        row.get("id").toString(),
+                        row.get("stock").toString(),
+                        row.get("memo").toString(),
+                        row.get("qty").toString(),
+                        row.get("type").toString(),
+                        row.get("exp").toString()
+                )).toList();
+        return list;
+    }
+
 }
 
 //    /**

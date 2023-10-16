@@ -29,7 +29,7 @@ public class SendMailController {
         String body = "買い物メモ: \n " + form.getMessage();
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("");
-        msg.setTo("");//適宜変更
+        msg.setTo(" ");//適宜変更
         msg.setSubject("買い物メモ");
         msg.setText("買って来て欲しいもの\n\n--------------------------\n" + body + "\n---------------------------");
         mailSender.send(msg);
@@ -37,14 +37,16 @@ public class SendMailController {
     }
 
         @GetMapping("/")
-        public String sendNotify() {
+        @ResponseBody
+        public String sendNotify(@RequestBody EmgDao dao) {
             SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setFrom(""); // 送信元メールアドレス
-            msg.setTo(""); // 送信先メールアドレス
+            String text =  "賞味期限:r/n/  ストック名: r/n/";
+            msg.setFrom("");// 送信元メールアドレス
+            msg.setTo(" "); // 送信先メールアドレス
 //        msg.setCc(); //Cc用
 //        msg.setBcc(); //Bcc用
             msg.setSubject("賞費期限のお知らせ"); // タイトル
-            msg.setText("消費期限\r\nストック名"); //本文
+            msg.setText("text"); //本文
 
             try {
                 mailSender.send(msg);

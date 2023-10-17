@@ -2,6 +2,7 @@ package com.example.stockapp.controller;
 
 import com.example.stockapp.dao.MemoForm;
 import com.example.stockapp.dao.EmgDao;
+import com.example.stockapp.controller.NotifyTimer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.mail.MailSender;
@@ -16,12 +17,12 @@ import java.util.List;
 
 @RestController
 public class SendMailController {
-        @Autowired
-        private final MailSender mailSender;
+    @Autowired
+    private final MailSender mailSender;
 
-        public SendMailController(MailSender mailSender) {
-            this.mailSender = mailSender;
-        }
+    public SendMailController(MailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     @RequestMapping(value = "/sendmail", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -29,7 +30,7 @@ public class SendMailController {
         String body = "買い物メモ: \n " + form.getMessage();
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("");
-        msg.setTo(" ");//適宜変更
+        msg.setTo("");//適宜変更
         msg.setSubject("買い物メモ");
         msg.setText("買って来て欲しいもの\n\n--------------------------\n" + body + "\n---------------------------");
         mailSender.send(msg);
@@ -38,22 +39,23 @@ public class SendMailController {
 
         @GetMapping("/")
         @ResponseBody
-        public String sendNotify(@RequestBody EmgDao dao) {
+        public String sendNotify(EmgController checkexp) {
+//        public String sendNotify() {
+            String text="消費期限:" + "\n ストック名:" ;//DBから消費期限とストック名を持ってきたい
             SimpleMailMessage msg = new SimpleMailMessage();
-            String text =  "賞味期限:r/n/  ストック名: r/n/";
             msg.setFrom("");// 送信元メールアドレス
-            msg.setTo(" "); // 送信先メールアドレス
+            msg.setTo(""); // 送信先メールアドレス
 //        msg.setCc(); //Cc用
 //        msg.setBcc(); //Bcc用
-            msg.setSubject("賞費期限のお知らせ"); // タイトル
-            msg.setText("text"); //本文
+            msg.setSubject("消費期限のお知らせ"); // タイトル
+            msg.setText("\n--------------------------\n" + text + "\n---------------------------"); //本文
 
             try {
                 mailSender.send(msg);
             } catch (MailException e) {
                 e.printStackTrace();
             }
-            return "賞味期限通知";
+            return "消費期限通知";
         }
     }
 

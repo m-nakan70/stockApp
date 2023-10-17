@@ -59,5 +59,15 @@ public class EmgController {
         dao.update(emgItem);
         return "redirect:/emglist";
     }
+
+//    @GetMapping("/")
+    String checkexp(Model model, @RequestParam("exp") String exp,
+                                 @RequestParam("stock") String stock){
+        List<EmgItem> stockItems = this.dao.checkexp(exp);
+        model.addAttribute("stock",stock);
+        model.addAttribute("exp", exp);
+        return "home";
+    }
 }
+
 

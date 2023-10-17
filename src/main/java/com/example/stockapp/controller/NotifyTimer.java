@@ -37,8 +37,15 @@ public class NotifyTimer {
         System.out.println(i + "回目タスク開始" + new Date());
     }
 }
+//    public void sendNotify() {
+//
+//    }
+
 //    @Scheduled(cron = "${cron.cron2}")
 //    public void sendnotify() {
+//        String message;
+//    }
+//}
 //        //日時を格納するためのDateクラスを宣言(現在時刻)
 //        Date date = new Date();
 //

@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 import java.util.Map;
 import lombok.Getter;
@@ -25,6 +25,7 @@ import lombok.Setter;
 @Setter
 public class EmgDao {
     private final JdbcTemplate jdbcTemplate;
+
     @Autowired
     EmgDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -69,11 +70,11 @@ public class EmgDao {
         return number;
     }
 
-    // データベースを検索し、賞味期限が残り3カ月を切ったもの,賞味期限のものを検索する
-    public <LIst> List<EmgController.EmgItem> checkexp(String exp){
+    //     データベースを検索し、賞味期限が残り3カ月を切ったもの,賞味期限のものを検索する
+    public <LIst> List<EmgController.EmgItem> checkexp(String exp) {
         StringBuilder query = new StringBuilder("SELECT * FROM  + emglist");
         boolean isExp = (exp != null && exp != "");   //Expに検索条件が入っているかのフラグ
-        if(isExp){
+        if (isExp) {
             query.append("SELECT *FROM emglist WHERE exp < CURDATE() +3 month or exp = CURDATE()");
         }
         // 検索して見つかったモノのレコード１件ごとに以下の処理を繰り返す。
@@ -87,10 +88,24 @@ public class EmgDao {
                         row.get("type").toString(),
                         row.get("exp").toString()
                 )).toList();
-        return list;
-    }
+//        int i = 0;
+//        while (i < list.size()) {
+//            System.out.println(list.get(i));
+//            ++i;
+//        }
 
+        return list;
+
+//        String Stock;
+//
+//        String Exp = new String(list.get());
+//        Stock=new String(list.get());
+//        int size = list.size();
+
+
+    }
 }
+
 
 //    /**
 //     * データベースからの取得処理を１つのメソッドにまとめておくと、修正も少なくてGood

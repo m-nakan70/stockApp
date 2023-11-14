@@ -1,14 +1,11 @@
 package com.example.stockapp.controller;
-import com.example.stockapp.controller.SendMailController;
-import java.text.SimpleDateFormat;
+import com.example.stockapp.dao.EmgDao;
+
 import java.util.Date;
-import java.util.Calendar;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +33,29 @@ public class NotifyTimer {
         i = i + 1;
         System.out.println(i + "回目タスク開始" + new Date());
     }
-}
+
+
+//    @Scheduled(cron = "${cron.cron2}")
+//    public void sendNotify(){
+//        EmgDao dao = new EmgDao();
+//        dao.checkexp();
+//
+//        SendMailController sendmail = new SendMailController();
+//        sendmail.sendNotify();
+    }
+
+//    @Scheduled(cron = "${cron.cron1}")
+//    public void sendNotify() {
+
+//        Notifylist list = new Notifylist;
+//        Notifylist.listmake();
+//        list.listmake();
+//        List notifylist=list.getlist();
+
+
+
+
+
 //    public void sendNotify() {
 //
 //    }

@@ -18,6 +18,21 @@
 
 <div class="emglist">
     <h3>防災備蓄品ストック一覧</h3>
+    <form action="/check_exp">
+        <div class="low">
+          <div class = "text-right">
+            <div class="form-check" >
+                <input type="checkbox" name="check" value="on"　id="flexCheckDefault"/>
+                <label class="form-check-label"> 消費期限チェック(期限3か月以内のもの）</label>
+                <button type="submit" class="btn btn-info" id="check_exp"　name="check_button"
+                        onclick="action='/check_exp'; submit();">検索</button>
+                <button type="submit" class="btn btn-success" id="send_notify"　name="send_button"
+                        onclick="action='/sendnotify'; submit();">通知</button>
+            </div>
+          </div>
+        </div>
+    </form>
+
     <table class="table table-striped" id="emergency">
         <thead>
         <tr>
@@ -64,5 +79,35 @@
         </tbody>
     </table>
 </div>
+            <script>
+                $(document).ready(function() {
+                 $('#send_notify').click(function() {
+                    $("#send_notify").prop("disabled", true);
+<!--                  // フォームのデータをJSONに変換-->
+<!--                    var rawData = $('#NotifyForm').serializeArray();-->
+<!--                    var data = {th:text="${emg.stock},th:value="${emg.exp}" };-->
+<!--                    jQuery.each(rawData, function(i, e) {-->
+<!--                    data[e.name] = e.value;-->
+                });
+                // Ajaxを使ってメールを送信
+                $.ajax({
+                    type: "POST",
+                    url: "./sendnotify",
+                    dataType: "json",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    scriptCharset: 'utf-8',
+                    success: function(outdata, dataType) {
+                    if (outdata[0] == "OK") alert("メール送信しました");
+                     $("#send_notify").prop("disabled", false);
+                     },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Error : " + errorThrown);
+                    $("#btnSend").prop("disabled", false);
+                            }
+                        });
+                     });
+                });
+            </script>
 </body>
 </html>

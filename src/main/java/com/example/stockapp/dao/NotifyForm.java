@@ -1,5 +1,5 @@
 package com.example.stockapp.dao;
-
+//import com.example.stockapp.controller.LineNotify;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class NotifyForm {
     private String message;
+
 }

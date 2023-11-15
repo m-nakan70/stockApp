@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.sql.ClientInfoStatus;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -67,6 +68,7 @@ public class EmgDao {
 
 
     public <LIst> List<EmgController.EmgItem> checkExp(String check) {
+//        String[] Array1;
         String query = "";
         if (Objects.equals(check, "on")) {
             query = "SELECT *FROM emglist WHERE exp < DATE_ADD(NOW(), INTERVAL 3 MONTH)ORDER BY type, exp";
@@ -74,7 +76,6 @@ public class EmgDao {
             query = "SELECT *FROM emglist";
         }
 
-        //query = "SELECT * FROM emglist ORDER BY type, exp";
         List<Map<String, Object>> result = this.jdbcTemplate.queryForList(query);
         List<EmgController.EmgItem> list = result.stream().map(
                 (Map<String, Object> row) -> new EmgController.EmgItem(
@@ -88,3 +89,5 @@ public class EmgDao {
         return list;
     }
 }
+
+

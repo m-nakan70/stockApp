@@ -27,7 +27,7 @@
                 <button type="submit" class="btn btn-info" id="check_exp"　name="check_button"
                         onclick="action='/check_exp'; submit();">検索</button>
                 <button type="submit" class="btn btn-success" id="send_notify"　name="send_button"
-                        onclick="action='/sendnotify'; submit();">通知</button>
+                        onclick="action='/send_notify'; submit();">通知</button>
             </div>
           </div>
         </div>
@@ -79,35 +79,35 @@
         </tbody>
     </table>
 </div>
-            <script>
-                $(document).ready(function() {
-                 $('#send_notify').click(function() {
-                    $("#send_notify").prop("disabled", true);
+<!--            <script>-->
+<!--                $(document).ready(function() {-->
+<!--                 $('#send_notify').click(function() {-->
+<!--                    $("#send_notify").prop("disabled", true);-->
 <!--                  // フォームのデータをJSONに変換-->
 <!--                    var rawData = $('#NotifyForm').serializeArray();-->
-<!--                    var data = {th:text="${emg.stock},th:value="${emg.exp}" };-->
+<!--                    var data = {"${emg.stock}, "${emg.exp}" };-->
 <!--                    jQuery.each(rawData, function(i, e) {-->
 <!--                    data[e.name] = e.value;-->
-                });
-                // Ajaxを使ってメールを送信
-                $.ajax({
-                    type: "POST",
-                    url: "./sendnotify",
-                    dataType: "json",
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    scriptCharset: 'utf-8',
-                    success: function(outdata, dataType) {
-                    if (outdata[0] == "OK") alert("メール送信しました");
-                     $("#send_notify").prop("disabled", false);
-                     },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Error : " + errorThrown);
-                    $("#btnSend").prop("disabled", false);
-                            }
-                        });
-                     });
-                });
-            </script>
+<!--                });-->
+<!--                // Ajaxを使ってメールを送信-->
+<!--                $.ajax({-->
+<!--                    type: "POST",-->
+<!--                    url: "./sendnotify",-->
+<!--                    dataType: "json",-->
+<!--                    data: JSON.stringify(data),-->
+<!--                    contentType: 'application/json',-->
+<!--                    scriptCharset: 'utf-8',-->
+<!--                    success: function(outdata, dataType) {-->
+<!--                    if (outdata[0] == "OK") alert("メール送信しました");-->
+<!--                     $("#send_notify").prop("disabled", false);-->
+<!--                     },-->
+<!--                    error: function(XMLHttpRequest, textStatus, errorThrown) {-->
+<!--                    alert("Error : " + errorThrown);-->
+<!--                    $("#btnSend").prop("disabled", false);-->
+<!--                            }-->
+<!--                        });-->
+<!--                     });-->
+<!--                });-->
+<!--            </script>-->
 </body>
 </html>

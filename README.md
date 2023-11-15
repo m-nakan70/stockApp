@@ -14,10 +14,8 @@
 
 ■基本操作
 ・買い物メモ、賞味期限が近くなった際に、e-mail(gmail)で通知できます
- 　e-mailで通知を飛ばすには、《application.properties》 に　　spring.mail.username = "gmailアドレス"
- 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　  spring.mail.password = "gmailのアプリケーションPW"　、
-   《SendMailController.java》　に　msg.setFrom("");// 送信元メールアドレス
-           　　　　　　　　 　　　   msg.setTo(""); // 送信先メールアドレス   の登録が必要です 
+ 　e-mailで通知を飛ばすには、《application.properties》 に　spring.mail.username = "gmailアドレス", spring.mail.password = "gmailのアプリケーションPW"　、
+   《SendMailController.java》　に　msg.setFrom("");// 送信元メールアドレス, msg.setTo(""); // 送信先メールアドレス  の登録が必要です 
                        
   
 ■実装できていませんが、買い物メモをLINEで知らせる、消費期限が近くなった品物のストック名を知らせる機能を入れたいと思っています  

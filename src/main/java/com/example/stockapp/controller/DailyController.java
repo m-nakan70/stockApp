@@ -1,0 +1,63 @@
+package com.example.stockapp.controller;
+
+import com.example.stockapp.dao.DailyDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+/**
+ * 日用品に関するクラス
+ * */
+@Controller
+public class DailyController {
+    private final DailyDao dao;
+    public record DailyItem(String id, String daily, String memo, String qty, String type){}
+
+    private List<DailyItem> dailyItems = new ArrayList<>();
+
+    @Autowired
+    DailyController(DailyDao dao){
+        this.dao = dao;
+    }
+
+    @GetMapping("/dailyadd")
+    String addItem(@RequestParam("daily") String daily,
+                   @RequestParam("memo") String memo,
+                   @RequestParam("qty") String qty,
+                   @RequestParam("type") String type){
+        String id = UUID.randomUUID().toString().substring(0,8);
+        DailyItem item = new DailyItem(id, daily, memo, qty, type);
+        dao.add(item);
+
+
+        return "redirect:/dailylistd";
+    }
+    @GetMapping("/dailylistd")
+    String dailyItems(Model model){
+        List<DailyItem> dailyItems = dao.findAll();
+        model.addAttribute("dailyList", dailyItems);
+        return "daily";
+    }
+    @GetMapping("/dailydelete")
+    String deleteItem(@RequestParam("id") String id){
+        dao.delete(id);
+        return "redirect:/dailylistd";
+    }
+    @GetMapping("/dailyupdate")
+    String updateItem(@RequestParam("id") String id,
+                      @RequestParam("daily") String daily,
+                      @RequestParam("memo") String memo,
+                      @RequestParam("qty") String qty,
+                      @RequestParam("type") String type){
+        DailyItem dailyItem = new DailyItem(id, daily, memo, qty, type);
+        dao.update(dailyItem);
+        return "redirect:/dailylistd";
+    }
+}
+
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DailyNeeds</title>
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<nav class="nav nav-pills nav-justified">
+    <a class="nav-link" th:href="@{/list}">食品</a>
+    <a class="nav-link active" aria-current="page">日用品</a>
+    <a class="nav-link" th:href="@{/emglist}">防災備蓄</a>
+    <a class="nav-link" th:href="@{/registration}" >登録</a>
+</nav><br>
+
+<div class="dailylist">
+    <h3>日用品ストック一覧</h3>
+    <table class="table table-striped" id="daily">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>ストック</th>
+            <th>メモ</th>
+            <th>個数</th>
+            <th>保管種別</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="daily : ${dailyList}">
+            <form>
+                <td width="80px">
+                    <span th:text="${daily.id}" />
+                    <input type="hidden" name="id" th:value="${daily.id}" />
+                </td>
+                <td width="150px">
+                    <span th:text="${daily.daily}" />
+                    <input type="hidden" name="daily" th:value="${daily.daily}" />
+                </td>
+                <td width="120px">
+                    <input name="memo" class="form-control" type="text" th:value="${daily.memo}" />
+                </td>
+                <td width="80px">
+                    <input class="form-control" id="update_qty" name="qty" type="number" min="0" max="25" th:value="${daily.qty}" />
+                </td>
+                <td width="80px">
+                    <span th:text="${daily.type}" />
+                    <input type="hidden" name="type" th:value="${daily.type}" />
+                </td>
+                <td width="100px">
+                    <button type="submit" class="btn btn-primary" id="update_buttom"
+                            onclick="action='/dailyupdate'; submit();">変更</button>
+                    <button type="submit" class="btn btn-primary" id="delete_buttom"
+                            onclick="action='/dailydelete'; submit();">削除</button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

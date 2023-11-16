@@ -10,6 +10,10 @@
 //import com.example.stockapp.dao.MemoForm;
 //import com.example.stockapp.dao.NotifyForm;
 //import org.springframework.web.bind.annotation.ResponseBody;
+/**
+ * Line送信に関するクラス
+ * テスト中
+ * */
 //
 //public class LineNotify {
 //    private String message;

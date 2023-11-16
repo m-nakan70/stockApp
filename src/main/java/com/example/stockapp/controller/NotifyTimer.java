@@ -9,6 +9,10 @@
 //import org.springframework.scheduling.annotation.Scheduled;
 //import org.springframework.stereotype.Component;
 //
+/**
+ * 賞味期限通知を送るためのタイマー機能のクラス
+ * 試行用
+ * */
 ////@Component
 ////public class NotifyTimer {
 ////

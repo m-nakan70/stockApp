@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * 食料品に関するクラス
+ * */
 @Controller
 public class HomeController {
     public final StockAppDao dao;
@@ -26,12 +26,7 @@ public class HomeController {
     HomeController(StockAppDao dao){
         this.dao = dao;
     }
-    @RequestMapping(value = "/hello")
-//    @ResponseBody
-    String hello(Model model){
-        model.addAttribute("time", LocalDateTime.now());
-        return "hello";
-    }
+
     @GetMapping("/registration")
     String regItems(Model model){
         List<StockItem>stockItems = dao.findAll();
@@ -90,18 +85,4 @@ public class HomeController {
         return "redirect:/list";
     }
 }
-
-
-//        return """
-//              <html>
-//                <head><title>Hello</title></head
-//                >
-//                <body>
-//                <h1>Hello</h1>
-//                It works!<br>
-//                現在時刻は%sです。
-//                </body>
-//              </html>
-//                """.formatted(LocalDateTime.now());
-
 

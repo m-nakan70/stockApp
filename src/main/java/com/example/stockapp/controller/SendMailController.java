@@ -1,19 +1,18 @@
 package com.example.stockapp.controller;
 
 import com.example.stockapp.dao.MemoForm;
-import com.example.stockapp.dao.NotifyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.mail.MailException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * 買い物メモ、防災備蓄品の消費期限メールを送るためのクラス
+ * */
 @RestController
 public class SendMailController {
     @Autowired
@@ -41,7 +40,7 @@ public class SendMailController {
         @ResponseBody
         public String sendNotify() {
 //        public String sendNotify() {
-            String text="消費期限が3カ月以内のストックがあります!!:";
+            String text="消費期限が3カ月以内のストックがあります!!";
 //                    + "\n ストック名:" ;//DBから消費期限とストック名を持ってきたい
             SimpleMailMessage msg = new SimpleMailMessage();
             msg.setFrom("");// 送信元メールアドレス

@@ -9,14 +9,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class StockAppDao{

@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script th:src="@{/js/chatgpt.js}"></script>
 </head>
 <body>
 <nav class="nav nav-pills nav-justified">
@@ -195,6 +196,24 @@
                     name="btnsubmit" id="btnSend" ;>送信</button>
         </form>
         </div>
+</div><br><br>
+<div class="recipi_consul" id="recipi_con">
+    <h5>レシピ検索</h5>
+    <div class="low">
+    <div class="chat-input-area">
+        <input type="text" id="input-field"/>
+        <input type="button" class = "btn btn-second" value="chatGPT" id="send-button">
+    </div>
+    <div class="chat-response-area">
+    </div><br>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <div class="recipi_site" >
+            <label class="go_to_label"> レシピ検索サイト</label>
+            <button type="submit" class="btn btn-info" id=go_to_btn"　name="go_to_btn"
+                    onclick="action='/check_exp'; submit();">クックパッド</button>
+        </div><br>
+    </div>
+</div>
         <script>
                 $(document).ready(function() {
                  $('#btnSend').click(function() {
@@ -244,6 +263,5 @@
                 }));
             });
             </script>
-</div>
 </body>
 </html>

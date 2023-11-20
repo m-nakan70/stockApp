@@ -20,6 +20,27 @@
 <div class="stocklist">
   <div class="table-responsive">
     <h3>食品ストック一覧</h3>
+      <div class="recipi_consul" id="recipi_con">
+         <div class="low">
+          <div class = "text-right">
+          <h5 style = "width: 600px; margin: auto;">レシピ検索</h5>
+          <div class="low">
+              <div class="chat-input-area">
+                  <input type="text" id="input-field"/>
+                  <input type="button" class = "btn btn-second" value="chatGPT" id="send-button">
+              </div>
+              <div class="chat-response-area">
+              </div><br>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <div class="recipi_site" >
+                  <label class="go_to_label"> レシピ検索サイト</label>
+                  <button type="submit" class="btn btn-info" id=go_to_btn"　name="go_to_btn"
+                          onclick="action='/check_exp'; submit();">クックパッド</button>
+              </div><br>
+          </div>
+          </div>
+         </div>
+      </div>
     <table class="table table-striped" id="food">
         <thead>
         <tr>

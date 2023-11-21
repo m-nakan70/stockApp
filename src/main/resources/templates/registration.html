@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script th:src="@{/js/chatgpt.js}"></script>
 </head>
 <body>
 <nav class="nav nav-pills nav-justified">
@@ -195,6 +196,7 @@
                     name="btnsubmit" id="btnSend" ;>送信</button>
         </form>
         </div>
+</div><br><br>
         <script>
                 $(document).ready(function() {
                  $('#btnSend').click(function() {
@@ -244,6 +246,5 @@
                 }));
             });
             </script>
-</div>
 </body>
 </html>
